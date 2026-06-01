@@ -369,7 +369,52 @@ LIST UP TO 3 THINGS YOUR SITE ABSOLUTELY MUST HAVE</label>
 </footer>
 
 <script>
-  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyz_Yls1vTbP4DLd85FuTKFfhlEEVIr6JEdW27GWJoZ0F8QoWH4vtEeqST8v7XPRCpGTg/usercontent";
+  /* =========================================================================
+     GOOGLE FORMS SETUP  —  fill these two things in and submissions land in
+     a Google Sheet automatically. Until you do, the form still "works" (it
+     shows the success message) but no data is sent.
+
+     HOW TO GET THE VALUES (5 min):
+     1. Go to forms.google.com and create a blank form.
+     2. Add ONE question per field listed below. "Short answer" is fine for
+        all of them. (Order does not matter; names do.)
+     3. Click the ⋮ menu (top-right) → "Get pre-filled link".
+     4. Type any dummy text into every question, then click "Get link" and
+        "Copy link". Paste it somewhere — it looks like:
+          .../viewform?usp=pp_url&entry.123456=foo&entry.789012=bar...
+     5. Each entry.XXXXXXX is the ID for that question, in the order you added
+        them. Match each one to the keys below.
+     6. Replace PASTE_YOUR_FORM_ID in GOOGLE_FORM_ACTION with the long ID from
+        your form's edit URL (docs.google.com/forms/d/e/THIS_PART/viewform).
+     7. In the Google Form, open the "Responses" tab → "Link to Sheets" to get
+        a live spreadsheet of every submission.
+     ========================================================================= */
+  const GOOGLE_FORM_ACTION = "https://docs.google.com/forms/d/e/PASTE_YOUR_FORM_ID/formResponse";
+  const GOOGLE_FORM_ENTRIES = {
+    fname:           "entry.1000001",
+    lname:           "entry.1000002",
+    title:           "entry.1000003",
+    email:           "entry.1000004",
+    phone:           "entry.1000005",
+    "contact-pref":  "entry.1000006",
+    "biz-name":      "entry.1000007",
+    "biz-type":      "entry.1000008",
+    presence:        "entry.1000009",
+    "social-fb":     "entry.1000010",
+    "social-ig":     "entry.1000011",
+    "social-other":  "entry.1000012",
+    goal:            "entry.1000013",
+    "service-area":  "entry.1000014",
+    vibe:            "entry.1000015",
+    inspo:           "entry.1000016",
+    logo:            "entry.1000017",
+    colors:          "entry.1000018",
+    "req-1":         "entry.1000019",
+    "req-2":         "entry.1000020",
+    "req-3":         "entry.1000021",
+    notes:           "entry.1000022",
+    "submission-type": "entry.1000023"
+  };
 
   function selectRadio(el, groupId) {
     document.querySelectorAll('#' + groupId + ' .radio-opt').forEach(o => o.classList.remove('selected'));
@@ -407,29 +452,22 @@ LIST UP TO 3 THINGS YOUR SITE ABSOLUTELY MUST HAVE</label>
       'req-3': fieldVal('req-3'), notes: fieldVal('notes'), 'submission-type': 'Application'
     };
 
-    // Send to Apps Script
-    const params = new URLSearchParams();
-    for (const key in data) {
-      params.append(key, data[key]);
+    // Send to Google Forms (only once you've filled in the config above).
+    if (!GOOGLE_FORM_ACTION.includes('PASTE_YOUR_FORM_ID')) {
+      const params = new URLSearchParams();
+      for (const key in data) {
+        if (GOOGLE_FORM_ENTRIES[key] && data[key]) params.append(GOOGLE_FORM_ENTRIES[key], data[key]);
+      }
+      fetch(GOOGLE_FORM_ACTION, {
+        method: 'POST', mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: params.toString()
+      }).catch(function () { /* no-cors: response is opaque, ignore */ });
     }
 
-    fetch(APPS_SCRIPT_URL, {
-      method: 'POST',
-      body: params
-    })
-    .then(response => response.text())
-    .then(result => {
-      document.getElementById('q-form').style.display = 'none';
-      document.getElementById('success-box').style.display = 'block';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      alert('Submission sent! Thanks for applying.');
-      document.getElementById('q-form').style.display = 'none';
-      document.getElementById('success-box').style.display = 'block';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    document.getElementById('q-form').style.display = 'none';
+    document.getElementById('success-box').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 </script>
 
