@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website Questionnaire</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; }
+
+  nav {
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; text-align: center;
+    padding: 1.2rem 2rem; border-bottom: 1px solid rgba(255,255,255,0.08);
+    background: rgba(10,10,10,0.55); backdrop-filter: blur(16px) saturate(160%); -webkit-backdrop-filter: blur(16px) saturate(160%);
+    position: sticky; top: 0; z-index: 100; gap: 0.5rem;
+  }
+  .nav-title {
+    font-family: 'Archivo Black', sans-serif; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.04em;
+    color: #fff; line-height: 1.5;
+  }
+  .nav-free { display: inline-block; font-size: 1.55rem; font-weight: 900; letter-spacing: 0.02em; }
+
+  .audience { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-top: 0.15rem; }
+  .audience span {
+    font-size: 0.72rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em;
+    padding: 0.38rem 0.85rem; border-radius: 999px; border: 1.5px solid; background: #141414;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .audience span:hover { transform: translateY(-2px); box-shadow: 0 0 14px -2px currentColor; }
+
+  .ticker {
+    width: 100%; overflow: hidden; white-space: nowrap; cursor: pointer; padding: 0.4rem 0;
+    border-top: 1px solid #1c1c1c; margin-top: 0.25rem;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+            mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  }
+  .ticker-track { display: inline-flex; align-items: center; animation: ticker-scroll 24s linear infinite; }
+  .ticker:hover .ticker-track { animation-play-state: paused; }
+  .ticker .tk { font-family: 'Archivo Black', sans-serif; font-size: 1rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 0 1.1rem; }
+  .ticker .sep { color: #555; font-size: 0.85rem; }
+  @keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  .divider-top { height: 4px; background: linear-gradient(90deg, #f9a826, #e040fb, #00e5ff, #00e676); }
+
+  .hero { padding: 3rem 2rem 2rem; text-align: center; }
+
+  .badge {
+    display: inline-block; background: #e040fb; color: #fff;
+    font-size: 0.68rem; font-weight: 900; text-transform: uppercase;
+    letter-spacing: 0.15em; padding: 0.5rem 1.2rem; border-radius: 12px;
+    margin-bottom: 1.5rem; line-height: 1.8; text-align: center;
+  }
+
+  h1 {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(1.8rem, 5vw, 3.5rem);
+    line-height: 1.05; margin: 0 0 1rem; letter-spacing: -1.5px; color: #fff;
+  }
+
+  .grad-y { background: linear-gradient(90deg, #f9a826, #ff5252); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .grad-p { background: linear-gradient(90deg, #e040fb, #00e5ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+  .hero-sub { font-size: 1rem; color: #aaa; max-width: 520px; margin: 0 auto; line-height: 1.7; }
+
+  .divider { height: 4px; background: linear-gradient(90deg, #f9a826, #e040fb, #00e5ff, #00e676); margin: 2.5rem 0 0; }
+
+  .form-section { max-width: 680px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+
+  .step {
+    background: #111; border: 1.5px solid #222; border-radius: 14px;
+    padding: 2rem; margin-bottom: 1.5rem;
+    --accent: #f9a826;
+  }
+  .step.s-orange { --accent:#f9a826; background:#160d02; border-color:#3d2a08; }
+  .step.s-pink   { --accent:#e040fb; background:#15071a; border-color:#3a1340; }
+  .step.s-cyan   { --accent:#00e5ff; background:#03161a; border-color:#0a3640; }
+  .step.s-green  { --accent:#00e676; background:#03160c; border-color:#0a3a22; }
+  .step .step-q { color: var(--accent); }
+  .step input:focus, .step textarea:focus, .step select:focus { border-color: var(--accent); }
+  .step label.radio-opt { color: #fff; }
+  .step label.radio-opt:hover { border-color: var(--accent); color: var(--accent); text-shadow: none; }
+  .step label.radio-opt.selected { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 13%, #1a1a1a); color: #fff; box-shadow: 0 0 16px -2px var(--accent); }
+  .step input:hover, .step textarea:hover, .step select:hover { border-color: var(--accent); }
+  .step .radio-opt input[type="radio"] { accent-color: var(--accent); }
+  .step .step-num { color: #fff !important; }
+  .step label { color: #fff; transition: color 0.15s, text-shadow 0.15s; }
+  .step label:hover { color: #fff; text-shadow: 0 0 9px var(--accent); }
+  .step input[type="file"] {
+    width: 100%; background: #1a1a1a; border: 2px dashed #333; color: #999;
+    padding: 0.85rem 1rem; border-radius: 6px; font-family: 'Inter', sans-serif;
+    font-size: 0.85rem; margin-bottom: 1rem; cursor: pointer; transition: border-color 0.2s;
+  }
+  .step input[type="file"]:hover { border-color: var(--accent); }
+  .step input[type="file"]::file-selector-button {
+    background: var(--accent); color: #000; border: none; font-weight: 700;
+    padding: 0.45rem 0.9rem; border-radius: 4px; margin-right: 0.85rem; cursor: pointer;
+    font-family: 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.72rem;
+  }
+
+  .step-num {
+    font-size: 0.65rem; font-weight: 900; text-transform: uppercase;
+    letter-spacing: 0.2em; margin-bottom: 0.5rem;
+  }
+
+  .step-q {
+    font-family: 'Archivo Black', sans-serif; font-size: 1.1rem;
+    color: #fff; margin-bottom: 1.25rem; line-height: 1.3;
+  }
+
+  label { display: block; font-size: 0.82rem; color: #999; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.4rem; }
+
+  input[type="text"], input[type="email"], input[type="tel"], textarea, select {
+    width: 100%; background: #1a1a1a; border: 2px solid #333; color: #fff;
+    font-size: 0.95rem; padding: 0.85rem 1rem; border-radius: 6px;
+    outline: none; font-family: 'Inter', sans-serif; margin-bottom: 1rem;
+  }
+  input:focus, textarea:focus, select:focus { border-color: #e040fb; }
+  input::placeholder, textarea::placeholder { color: #555; }
+  textarea { resize: vertical; min-height: 100px; }
+  select option { background: #1a1a1a; }
+
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 520px) { .field-row { grid-template-columns: 1fr; } }
+
+  .radio-group { display: flex; flex-direction: column; gap: 0.6rem; }
+  .radio-opt {
+    display: flex; align-items: center; gap: 0.75rem;
+    background: #1a1a1a; border: 2px solid #2a2a2a; border-radius: 8px;
+    padding: 0.75rem 1rem; cursor: pointer; transition: border-color 0.2s, color 0.2s, box-shadow 0.2s;
+    font-size: 0.9rem; color: #fff;
+  }
+  .radio-opt:hover { border-color: #e040fb; }
+  .radio-opt input[type="radio"] { accent-color: #e040fb; width: 16px; height: 16px; margin: 0; flex-shrink: 0; }
+  .radio-opt.selected { border-color: #e040fb; background: #1a001a; color: #fff; }
+
+  .submit-wrap { text-align: center; margin-top: 2.5rem; }
+
+  .btn-submit {
+    background-color: #f9a826 !important;
+    color: #000 !important; font-weight: 900; font-size: 1rem;
+    padding: 1rem 2.5rem; border: 3px solid #f9a826; border-radius: 6px;
+    text-transform: uppercase; letter-spacing: 0.06em; cursor: pointer;
+    font-family: 'Archivo Black', sans-serif;
+    display: inline-block !important; opacity: 1 !important;
+  }
+
+  .success-box {
+    display: none; background: #001a0a; border: 2px solid #00e676;
+    border-radius: 12px; padding: 2.5rem; text-align: center; margin-top: 2rem;
+  }
+  .success-box h3 { font-family: 'Archivo Black', sans-serif; font-size: 1.5rem; color: #00e676; margin-bottom: 0.75rem; }
+  .success-box p { color: #aaa; font-size: 0.95rem; line-height: 1.6; }
+
+  footer { background: #000; border-top: 1px solid #1a1a1a; padding: 2rem; text-align: center; font-size: 0.8rem; color: #666; }
+</style>
+</head>
+<body>
+
+<div class="divider-top"></div>
+<nav>
+  <div class="nav-title">Small Businesses &amp; Freelancers · In Charlotte County, FL</div>
+  <div class="audience">
+    <span style="color:#f9a826;border-color:#f9a826">Handymen</span>
+    <span style="color:#e040fb;border-color:#e040fb">Lawn Services</span>
+    <span style="color:#00e5ff;border-color:#00e5ff">Pool Services</span>
+    <span style="color:#00e676;border-color:#00e676">House Cleaners</span>
+    <span style="color:#4d7cff;border-color:#4d7cff">Petsitters</span>
+    <span style="color:#ff5252;border-color:#ff5252">Small Business Owners</span>
+  </div>
+  <div class="ticker" onclick="document.querySelector('.form-section').scrollIntoView({behavior:'smooth'})">
+    <div class="ticker-track">
+      <span class="tk" style="color:#f9a826">FREE WEBSITE DESIGN GIVEAWAY</span><span class="sep">✦</span>
+      <span class="tk" style="color:#e040fb">FREE WEBSITE DESIGN GIVEAWAY</span><span class="sep">✦</span>
+      <span class="tk" style="color:#00e5ff">FREE WEBSITE DESIGN GIVEAWAY</span><span class="sep">✦</span>
+      <span class="tk" style="color:#00e676">FREE WEBSITE DESIGN GIVEAWAY</span><span class="sep">✦</span>
+      <span class="tk" style="color:#f9a826">FREE WEBSITE DESIGN GIVEAWAY</span><span class="sep">✦</span>
+      <span class="tk" style="color:#e040fb">FREE WEBSITE DESIGN GIVEAWAY</span><span class="sep">✦</span>
+      <span class="tk" style="color:#00e5ff">FREE WEBSITE DESIGN GIVEAWAY</span><span class="sep">✦</span>
+      <span class="tk" style="color:#00e676">FREE WEBSITE DESIGN GIVEAWAY</span><span class="sep">✦</span>
+    </div>
+  </div>
+</nav>
+
+<section class="hero" style="color: rgb(0, 229, 255)">
+  <div class="badge" style="background-color: rgb(0, 229, 255); color:#0a0a0a">Step 1 of 1 — Takes 3 Minutes</div>
+  <h1>Tell Me About<br><span class="grad-y">Your Business</span></h1>
+  <p class="hero-sub">Fill this out and I'll review your answers —<br>I'm choosing 2 spots and will notify the contact<br>on Friday, June 5, 2026.</p>
+</section>
+
+<div class="divider"></div>
+
+<section class="form-section">
+  <div id="q-form">
+
+    <div class="step s-orange" style="--accent:#00e5ff; background: linear-gradient(160deg, rgba(0,229,255,0.13), #0b0e10); border-color: rgba(0,229,255,0.38)">
+      <div class="step-num" style="color:#00e5ff">01 — The Contact Person</div>
+      <div class="step-q">Who's the main contact?</div>
+      <div class="field-row">
+        <div>
+          <label>First Name</label>
+          <input type="text" id="fname" placeholder="John" />
+        </div>
+        <div>
+          <label>Last Name</label>
+          <input type="text" id="lname" placeholder="Smith" />
+        </div>
+      </div>
+      <label>Title / Role</label>
+      <input type="text" id="title" placeholder="e.g. Owner, Founder, Operations Manager" />
+      <label>Email Address</label>
+      <input type="email" id="email" placeholder="you@example.com" />
+      <label>Phone Number</label>
+      <input type="tel" id="phone" placeholder="(813) 555-0100" />
+      <label style="margin-top:0.5rem;color:var(--accent)">How do you prefer to be contacted?</label>
+      <div class="radio-group" id="contact-pref-group">
+        <label class="radio-opt" onclick="selectRadio(this, 'contact-pref-group')">
+          <input type="radio" name="contact-pref" value="email" /> Email
+        </label>
+        <label class="radio-opt" onclick="selectRadio(this, 'contact-pref-group')">
+          <input type="radio" name="contact-pref" value="text" /> Text
+        </label>
+        <label class="radio-opt" onclick="selectRadio(this, 'contact-pref-group')">
+          <input type="radio" name="contact-pref" value="call" /> Phone Call
+        </label>
+        <label class="radio-opt" onclick="selectRadio(this, 'contact-pref-group')">
+          <input type="radio" name="contact-pref" value="any" /> Any of the above
+        </label>
+      </div>
+    </div>
+
+    <div class="step s-pink">
+      <div class="step-num" style="color:#e040fb">02 — Your Business</div>
+      <div class="step-q">What is your business called and what do you do?</div>
+      <label>Business Name</label>
+      <input type="text" id="biz-name" placeholder="e.g. Smith's Lawn Care" />
+      <label>Type of Business / Services You Offer</label>
+      <textarea id="biz-type" placeholder="e.g. Residential lawn mowing, edging, and cleanup in the Brandon area"></textarea>
+    </div>
+
+    <div class="step s-cyan" style="--accent:#ff6b9d; background: linear-gradient(160deg, rgba(255,107,157,0.13), #100b0e); border-color: rgba(255,107,157,0.38)">
+      <div class="step-num" style="color:#ff6b9d">03 — Online Presence</div>
+      <div class="step-q">Where are you at right now?</div>
+      <div class="radio-group" id="presence-group">
+        <label class="radio-opt" onclick="selectRadio(this, 'presence-group')">
+          <input type="radio" name="presence" value="none" /> No website or social media presence
+        </label>
+        <label class="radio-opt" onclick="selectRadio(this, 'presence-group')">
+          <input type="radio" name="presence" value="facebook" /> Facebook page only
+        </label>
+        <label class="radio-opt" onclick="selectRadio(this, 'presence-group')">
+          <input type="radio" name="presence" value="both" /> Facebook + other social media, no website
+        </label>
+      </div>
+      <label style="margin-top:1.25rem">Facebook Page Link</label>
+      <input type="text" id="social-fb" placeholder="facebook.com/yourbusiness" />
+      <label>Instagram Handle or Link</label>
+      <input type="text" id="social-ig" placeholder="@yourbusiness" />
+      <label>Other Social Link</label>
+      <input type="text" id="social-other" placeholder="TikTok, Google Business, Yelp, etc." />
+    </div>
+
+    <div class="step s-green">
+      <div class="step-num" style="color:#00e676">04 — Your Goals</div>
+      <div class="step-q">What do you most want your website to do for you?</div>
+      <div class="radio-group" id="goal-group">
+        <label class="radio-opt" onclick="selectRadio(this, 'goal-group')">
+          <input type="radio" name="goal" value="leads" /> Get more leads and inquiries
+        </label>
+        <label class="radio-opt" onclick="selectRadio(this, 'goal-group')">
+          <input type="radio" name="goal" value="bookings" /> Increase bookings
+        </label>
+        <label class="radio-opt" onclick="selectRadio(this, 'goal-group')">
+          <input type="radio" name="goal" value="credibility" /> Look more professional and credible
+        </label>
+        <label class="radio-opt" onclick="selectRadio(this, 'goal-group')">
+          <input type="radio" name="goal" value="all" /> All of the above
+        </label>
+      </div>
+    </div>
+
+    <div class="step s-orange" style="--accent:#ff5252; background: linear-gradient(160deg, rgba(255,82,82,0.13), #100b0b); border-color: rgba(255,82,82,0.38)">
+      <div class="step-num" style="color:#ff5252">05 — Service Area</div>
+      <div class="step-q">What city or area do you serve?</div>
+      <input type="text" id="service-area" placeholder="e.g. Brandon, FL and surrounding areas" />
+    </div>
+
+    <div class="step s-pink" style="--accent:#b06bff; background: linear-gradient(160deg, rgba(176,107,255,0.13), #0d0b12); border-color: rgba(176,107,255,0.38)">
+      <div class="step-num" style="color:#b06bff">06 — Vibe &amp; Style</div>
+      <div class="step-q">Pick the words that best describe your brand.</div>
+      <div class="radio-group" id="vibe-group">
+        <label class="radio-opt" onclick="selectRadio(this, 'vibe-group')">
+          <input type="radio" name="vibe" value="professional" /> Clean. Professional.
+        </label>
+        <label class="radio-opt" onclick="selectRadio(this, 'vibe-group')">
+          <input type="radio" name="vibe" value="bold" /> Bold. Energetic.
+        </label>
+        <label class="radio-opt" onclick="selectRadio(this, 'vibe-group')">
+          <input type="radio" name="vibe" value="friendly" /> Friendly. Local.
+        </label>
+        <label class="radio-opt" onclick="selectRadio(this, 'vibe-group')">
+          <input type="radio" name="vibe" value="rugged" /> Rugged. Hardworking.
+        </label>
+        <label class="radio-opt" onclick="selectRadio(this, 'vibe-group')">
+          <input type="radio" name="vibe" value="minimal" /> Simple. Minimal.
+        </label>
+      </div>
+      <label style="margin-top:1.25rem">Any websites you like the look of? (paste links if you have them)</label>
+      <textarea id="inspo" placeholder="e.g. I like how abc.com looks, or I want something similar to xyz.com..."></textarea>
+    </div>
+
+    <div class="step s-cyan" style="--accent:#00d3b8; background: linear-gradient(160deg, rgba(0,211,184,0.13), #0a100e); border-color: rgba(0,211,184,0.38)">
+      <div class="step-num" style="color:#00d3b8">07 — Colors &amp; Branding</div>
+      <div class="step-q">Do you have a logo or existing color scheme?</div>
+      <div class="radio-group" id="logo-group">
+        <label class="radio-opt" onclick="selectRadio(this, 'logo-group')">
+          <input type="radio" name="logo" value="yes-both" /> Yes — I have a logo and brand colors
+        </label>
+        <label class="radio-opt" onclick="selectRadio(this, 'logo-group')">
+          <input type="radio" name="logo" value="yes-logo" /> I have a logo but no defined colors
+        </label>
+        <label class="radio-opt" onclick="selectRadio(this, 'logo-group')">
+          <input type="radio" name="logo" value="colors-only" /> I have colors in mind but no logo
+        </label>
+        <label class="radio-opt" onclick="selectRadio(this, 'logo-group')">
+          <input type="radio" name="logo" value="none" /> Starting from scratch — no logo or colors yet
+        </label>
+      </div>
+      <label style="margin-top:1.25rem">Describe your preferred colors or paste any hex/brand codes if you have them</label>
+      <input type="text" id="colors" placeholder="e.g. Dark green and white, or #2d6a2d and #ffffff" />
+      <label style="margin-top:0.5rem">Upload your logo (if you have one)</label>
+      <input type="file" id="logo-upload" accept="image/*" />
+    </div>
+
+    <div class="step s-pink" style="--accent:#4d7cff; background: linear-gradient(160deg, rgba(77,124,255,0.13), #0b0c10); border-color: rgba(77,124,255,0.38)">
+      <div class="step-num" style="color:#4d7cff">08 — Must-Haves</div>
+      <div class="step-q">Any 100% requirements for the site?</div>
+      <label>NON-NEGOTIABLES —
+LIST UP TO 3 THINGS YOUR SITE ABSOLUTELY MUST HAVE</label>
+      <p style="font-size:0.78rem;color:#777;margin:-0.4rem 0 0.9rem;line-height:1.5;">The basics — your name, address, and contact details — are a given and don't count as one of the 3.</p>
+      <input type="text" id="req-1" placeholder="1. e.g. A click-to-call button" />
+      <input type="text" id="req-2" placeholder="2. e.g. Online booking" />
+      <input type="text" id="req-3" placeholder="3. e.g. A photo gallery of past work" />
+    </div>
+
+    <div class="step s-green" style="--accent:#ff5cc8; background: linear-gradient(160deg, rgba(255,92,200,0.12), #100b0e); border-color: rgba(255,92,200,0.36)">
+      <div class="step-num" style="color:#ff5cc8">09 — Anything Else</div>
+      <div class="step-q">Anything you want me to know before we get started?</div>
+      <textarea id="notes" placeholder="Specific features, questions, things that are important to you..."></textarea>
+    </div>
+
+    <div class="submit-wrap">
+      <button class="btn-submit" onclick="submitForm()">Submit Application</button>
+      <p style="font-size:0.75rem;color:#555;margin-top:1rem">No credit card. No spam. No nonsense. No catch.</p>
+    </div>
+
+  </div>
+
+  <div class="success-box" id="success-box">
+    <h3>You're Reserved!</h3>
+    <p>Thanks for filling that out. I'll review your answers and reach out within 24 hours to confirm your spot and kick things off.</p>
+  </div>
+
+</section>
+
+<footer>
+  <p>2026 Portfolio Series</p>
+</footer>
+
+<script>
+  /* =========================================================================
+     GOOGLE FORMS SETUP  —  fill these two things in and submissions land in
+     a Google Sheet automatically. Until you do, the form still "works" (it
+     shows the success message) but no data is sent.
+
+     HOW TO GET THE VALUES (5 min):
+     1. Go to forms.google.com and create a blank form.
+     2. Add ONE question per field listed below. "Short answer" is fine for
+        all of them. (Order does not matter; names do.)
+     3. Click the ⋮ menu (top-right) → "Get pre-filled link".
+     4. Type any dummy text into every question, then click "Get link" and
+        "Copy link". Paste it somewhere — it looks like:
+          .../viewform?usp=pp_url&entry.123456=foo&entry.789012=bar...
+     5. Each entry.XXXXXXX is the ID for that question, in the order you added
+        them. Match each one to the keys below.
+     6. Replace PASTE_YOUR_FORM_ID in GOOGLE_FORM_ACTION with the long ID from
+        your form's edit URL (docs.google.com/forms/d/e/THIS_PART/viewform).
+     7. In the Google Form, open the "Responses" tab → "Link to Sheets" to get
+        a live spreadsheet of every submission.
+     ========================================================================= */
+  const GOOGLE_FORM_ACTION = "https://docs.google.com/forms/d/e/PASTE_YOUR_FORM_ID/formResponse";
+  const GOOGLE_FORM_ENTRIES = {
+    fname:           "entry.1000001",
+    lname:           "entry.1000002",
+    title:           "entry.1000003",
+    email:           "entry.1000004",
+    phone:           "entry.1000005",
+    "contact-pref":  "entry.1000006",
+    "biz-name":      "entry.1000007",
+    "biz-type":      "entry.1000008",
+    presence:        "entry.1000009",
+    "social-fb":     "entry.1000010",
+    "social-ig":     "entry.1000011",
+    "social-other":  "entry.1000012",
+    goal:            "entry.1000013",
+    "service-area":  "entry.1000014",
+    vibe:            "entry.1000015",
+    inspo:           "entry.1000016",
+    logo:            "entry.1000017",
+    colors:          "entry.1000018",
+    "req-1":         "entry.1000019",
+    "req-2":         "entry.1000020",
+    "req-3":         "entry.1000021",
+    notes:           "entry.1000022",
+    "submission-type": "entry.1000023"
+  };
+
+  function selectRadio(el, groupId) {
+    document.querySelectorAll('#' + groupId + ' .radio-opt').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+
+  function fieldVal(id) {
+    const el = document.getElementById(id);
+    return el ? el.value.trim() : '';
+  }
+  function radioVal(name) {
+    const el = document.querySelector('input[name="' + name + '"]:checked');
+    return el ? el.value : '';
+  }
+
+  function submitForm() {
+    const required = ['fname', 'lname', 'email', 'biz-name', 'biz-type', 'service-area'];
+    for (let id of required) {
+      if (!document.getElementById(id).value.trim()) {
+        alert('Please fill in all required fields before submitting.');
+        document.getElementById(id).focus();
+        return;
+      }
+    }
+
+    const data = {
+      fname: fieldVal('fname'), lname: fieldVal('lname'), title: fieldVal('title'),
+      email: fieldVal('email'), phone: fieldVal('phone'), 'contact-pref': radioVal('contact-pref'),
+      'biz-name': fieldVal('biz-name'), 'biz-type': fieldVal('biz-type'),
+      presence: radioVal('presence'), 'social-fb': fieldVal('social-fb'),
+      'social-ig': fieldVal('social-ig'), 'social-other': fieldVal('social-other'),
+      goal: radioVal('goal'), 'service-area': fieldVal('service-area'),
+      vibe: radioVal('vibe'), inspo: fieldVal('inspo'), logo: radioVal('logo'),
+      colors: fieldVal('colors'), 'req-1': fieldVal('req-1'), 'req-2': fieldVal('req-2'),
+      'req-3': fieldVal('req-3'), notes: fieldVal('notes'), 'submission-type': 'Application'
+    };
+
+    // Send to Google Forms (only once you've filled in the config above).
+    if (!GOOGLE_FORM_ACTION.includes('PASTE_YOUR_FORM_ID')) {
+      const params = new URLSearchParams();
+      for (const key in data) {
+        if (GOOGLE_FORM_ENTRIES[key] && data[key]) params.append(GOOGLE_FORM_ENTRIES[key], data[key]);
+      }
+      fetch(GOOGLE_FORM_ACTION, {
+        method: 'POST', mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: params.toString()
+      }).catch(function () { /* no-cors: response is opaque, ignore */ });
+    }
+
+    document.getElementById('q-form').style.display = 'none';
+    document.getElementById('success-box').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>

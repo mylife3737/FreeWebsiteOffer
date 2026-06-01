@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Website Offer for Small Businesses & Freelancers</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; }
+
+  nav {
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; text-align: center;
+    padding: 1.2rem 2rem; border-bottom: 1px solid rgba(255,255,255,0.08);
+    background: rgba(10,10,10,0.55); backdrop-filter: blur(16px) saturate(160%); -webkit-backdrop-filter: blur(16px) saturate(160%);
+    position: sticky; top: 0; z-index: 100; flex-wrap: wrap; gap: 0.75rem;
+  }
+  .nav-title {
+    font-family: 'Archivo Black', sans-serif; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.04em;
+    color: #fff; line-height: 1.5;
+  }
+  .nav-free { display: inline-block; font-size: 1.55rem; font-weight: 900; letter-spacing: 0.02em; }
+
+  button { cursor: pointer; font-family: 'Inter', sans-serif; }
+
+  .audience { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-top: 0.15rem; }
+  .audience span {
+    font-size: 0.72rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em;
+    padding: 0.38rem 0.85rem; border-radius: 999px; border: 1.5px solid; background: #141414;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .audience span:hover { transform: translateY(-2px); box-shadow: 0 0 14px -2px currentColor; }
+
+  .nav-btn {
+    background: transparent; color: #e040fb; font-weight: 900; font-size: 1.6rem;
+    padding: 0.2rem 0.8rem; border: none; border-radius: 4px;
+    font-family: 'Archivo Black', sans-serif; letter-spacing: 0.04em;
+  }
+
+  .ticker {
+    width: 100%; overflow: hidden; white-space: nowrap; cursor: pointer; padding: 0.4rem 0;
+    border-top: 1px solid #1c1c1c; margin-top: 0.25rem;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+            mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  }
+  .ticker-track { display: inline-flex; align-items: center; animation: ticker-scroll 24s linear infinite; }
+  .ticker:hover .ticker-track { animation-play-state: paused; }
+  .ticker .tk { font-family: 'Archivo Black', sans-serif; font-size: 1rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 0 1.1rem; }
+  .ticker .sep { color: #555; font-size: 0.85rem; }
+  @keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  .hero { padding: 4rem 2rem 3rem; text-align: center; }
+
+  .badge {
+    display: inline-block; background: #e040fb; color: #fff;
+    font-size: 0.68rem; font-weight: 900; text-transform: uppercase;
+    letter-spacing: 0.15em; padding: 0.6rem 1.2rem; border-radius: 12px;
+    margin-bottom: 1.5rem; line-height: 1.8; text-align: center;
+  }
+
+  h1 {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(2.2rem, 6vw, 4.5rem);
+    line-height: 1.05; margin: 0 0 1.5rem; letter-spacing: -2px; color: #fff;
+  }
+
+  .grad-y { background: linear-gradient(90deg, #f9a826, #ff5252); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .grad-p { background: linear-gradient(90deg, #e040fb, #00e5ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+  .hero-sub { font-size: 1.05rem; color: #ccc; max-width: 560px; margin: 0 auto 2.5rem; line-height: 1.7; }
+
+  .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2.5rem; }
+
+  .btn-primary {
+    background-color: #f9a826 !important;
+    background-image: none !important;
+    color: #000 !important; font-weight: 900; font-size: 1rem;
+    padding: 1rem 2.2rem; border: 3px solid #f9a826; border-radius: 6px;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    opacity: 1 !important; visibility: visible !important;
+    display: inline-block !important;
+    box-shadow: 0 0 22px -3px rgba(249,168,38,0.75); transition: box-shadow 0.2s, transform 0.15s;
+  }
+  .btn-secondary {
+    background-color: #333333 !important;
+    background-image: none !important;
+    color: #ffffff !important; font-weight: 700; font-size: 1rem;
+    padding: 1rem 2.2rem; border: 3px solid #ffffff; border-radius: 6px;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    opacity: 1 !important; visibility: visible !important;
+    display: inline-block !important;
+    box-shadow: 0 0 18px -4px rgba(255,255,255,0.45); transition: box-shadow 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { box-shadow: 0 0 34px 0 rgba(249,168,38,0.95) !important; transform: translateY(-2px); }
+  .btn-secondary:hover { box-shadow: 0 0 26px -2px rgba(255,255,255,0.7) !important; transform: translateY(-2px); }
+
+  .slots { display: flex; gap: 1rem; justify-content: center; margin-bottom: 0.75rem; flex-wrap: wrap; }
+  .slot {
+    display: flex; align-items: center; gap: 0.6rem;
+    background: #1a1a1a; border: 1.5px solid #333; border-radius: 8px;
+    padding: 0.55rem 1.1rem; font-size: 0.82rem; font-weight: 700; color: #fff;
+  }
+  .slot-btn {
+    cursor: pointer; font-family: 'Inter', sans-serif;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .slot-btn:hover { border-color: #f9a826; background: #222; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: #00e676; box-shadow: 0 0 6px #00e676; }
+
+  .divider { height: 4px; background: linear-gradient(90deg, #f9a826, #e040fb, #00e5ff); }
+
+  .section { padding: 4rem 2rem; max-width: 900px; margin: 0 auto; }
+
+  .tag { font-size: 0.68rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.2em; color: #00e5ff; margin-bottom: 0.75rem; }
+
+  h2 { font-family: 'Archivo Black', sans-serif; font-size: clamp(1.8rem, 4vw, 2.8rem); letter-spacing: -1px; margin: 0 0 2.5rem; line-height: 1.1; color: #fff; }
+
+  .pages-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1.25rem; margin-bottom: 3rem; }
+
+  .pg-card { border-radius: 12px; padding: 1.75rem 1.5rem; position: relative; overflow: hidden; transition: transform 0.15s, box-shadow 0.2s; }
+  .pg-card:hover { transform: translateY(-3px); }
+  .pg-1:hover { box-shadow: 0 0 24px -4px #00e5ff; }
+  .pg-2:hover { box-shadow: 0 0 24px -4px #e040fb; }
+  .pg-3:hover { box-shadow: 0 0 24px -4px #00e676; }
+  .pg-1 { background: #001a1a; border: 2px solid #00e5ff; }
+  .pg-2 { background: #1a001a; border: 2px solid #e040fb; }
+  .pg-3 { background: #001a12; border: 2px solid #00e676; }
+
+  .pg-num { font-family: 'Archivo Black', sans-serif; font-size: 3.5rem; line-height: 1; opacity: 0.12; position: absolute; top: 1rem; right: 1.25rem; color: #fff; }
+  .pg-title { font-family: 'Archivo Black', sans-serif; font-size: 1.25rem; margin-bottom: 0.5rem; }
+  .pg-desc { font-size: 0.85rem; color: #ccc; line-height: 1.55; }
+
+  .deal-box { background: #151515; border: 2px solid #2a2a2a; border-radius: 16px; padding: 2.5rem 2rem; margin-bottom: 2rem; }
+  .deal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; margin-top: 2rem; }
+  .deal-item { text-align: center; padding: 1.4rem 0.75rem; border-radius: 10px; background: #0a0a0a; border: 1.5px solid #2a2a2a; }
+  .dl { font-size: 0.7rem; color: #999; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; margin-bottom: 0.4rem; }
+  .dv { font-size: 1rem; font-weight: 700; }
+  .green { color: #00e676; } .yellow { color: #f9a826; } .pink { color: #e040fb; } .blue { color: #00e5ff; }
+
+  .ask-box { background: #111; border-radius: 12px; padding: 1.75rem; border: 1.5px solid #222; margin-bottom: 2rem; }
+  .ask-list { list-style: none; padding: 0; margin: 0.75rem 0 0; display: flex; flex-direction: column; gap: 0.75rem; }
+  .ask-list li { font-size: 0.95rem; color: #ddd; padding-left: 1.7rem; text-indent: -1.7rem; }
+  .tick { color: #00e5ff; margin-right: 0.5rem; font-weight: 900; }
+
+  .faq-item { border-bottom: 1px solid #222; padding: 1.25rem 0; cursor: pointer; }
+  .faq-q { display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 0.95rem; color: #fff; gap: 1rem; transition: text-shadow 0.2s, color 0.2s; }
+  .faq-item:hover .faq-q { color: var(--fq,#f9a826); text-shadow: 0 0 13px color-mix(in srgb, var(--fq,#f9a826) 55%, transparent); }
+  .faq-item:hover .arrow { color: var(--fq,#f9a826); text-shadow: 0 0 10px color-mix(in srgb, var(--fq,#f9a826) 60%, transparent); }
+  .faq-a { font-size: 0.88rem; color: #bbb; line-height: 1.6; margin-top: 0.75rem; display: none; }
+  .faq-a.open { display: block; }
+  .arrow { transition: transform 0.2s; font-size: 1.1rem; color: #666; flex-shrink: 0; }
+  .arrow.open { transform: rotate(90deg); color: #e040fb; }
+
+  .cta-section { background: #0d0d0d; border-top: 4px solid; border-image: linear-gradient(90deg,#f9a826,#e040fb,#00e5ff) 1; padding: 5rem 2rem; text-align: center; }
+  .cta-h2 { font-family: 'Archivo Black', sans-serif; font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: -1.5px; line-height: 1.05; margin-bottom: 1rem; color: #fff; }
+  .cta-sub { color: #bbb; font-size: 1rem; margin-bottom: 2.5rem; max-width: 420px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+
+  .form-wrap { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; max-width: 500px; margin: 0 auto 1.5rem; }
+  .inp { flex: 1; min-width: 170px; background: #1a1a1a; border: 2px solid #444; color: #fff; font-size: 0.95rem; padding: 0.85rem 1.1rem; border-radius: 6px; outline: none; font-family: 'Inter', sans-serif; }
+  .inp:focus { border-color: #e040fb; }
+  .inp::placeholder { color: #777; }
+
+  .btn-submit {
+    background-color: #f9a826 !important;
+    background-image: none !important;
+    color: #000 !important; font-weight: 900; font-size: 0.95rem;
+    padding: 0.9rem 1.75rem; border: 3px solid #f9a826; border-radius: 6px;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    opacity: 1 !important; visibility: visible !important;
+    display: inline-block !important;
+  }
+
+  .success-msg { display: none; background: #001a0a; border: 2px solid #00e676; border-radius: 10px; padding: 1.5rem; color: #00e676; font-weight: 700; font-size: 1rem; max-width: 480px; margin: 0 auto; }
+
+  footer { background: #000; border-top: 1px solid #1a1a1a; padding: 2rem; text-align: center; font-size: 0.8rem; color: #666; }
+  footer span { color: #f9a826; font-weight: 700; }
+
+  .kw { white-space: nowrap; }
+
+  .nav-cta {
+    display: inline-block; background: #f9a826; color: #000 !important; text-decoration: none;
+    font-family: 'Archivo Black', sans-serif; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em;
+    padding: 0.55rem 1.1rem; border-radius: 999px; box-shadow: 0 0 18px -4px #f9a826;
+    transition: transform 0.15s, box-shadow 0.2s;
+  }
+  .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 0 26px -2px #f9a826; }
+  .nav-deadline { font-size: 0.7rem; color: #999; letter-spacing: 0.04em; }
+
+  .btn-interested {
+    background-color: #00e5ff !important; color: #000 !important; font-weight: 900; font-size: 1rem;
+    padding: 1rem 2.2rem; border: 3px solid #00e5ff; border-radius: 6px; cursor: pointer;
+    text-transform: uppercase; letter-spacing: 0.06em; font-family: 'Inter', sans-serif;
+    box-shadow: 0 0 18px -4px #00e5ff; transition: box-shadow 0.2s, transform 0.15s;
+  }
+  .btn-interested:hover { box-shadow: 0 0 30px 0 #00e5ff; transform: translateY(-2px); }
+
+  #toTop {
+    position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 200;
+    width: 46px; height: 46px; border-radius: 50%; border: 2px solid #f9a826;
+    background: rgba(10,10,10,0.7); backdrop-filter: blur(8px); color: #f9a826;
+    font-size: 1.3rem; line-height: 1; cursor: pointer; display: none;
+    align-items: center; justify-content: center; box-shadow: 0 0 18px -4px #f9a826;
+    transition: transform 0.15s, box-shadow 0.2s;
+  }
+  #toTop:hover { transform: translateY(-2px); box-shadow: 0 0 26px -2px #f9a826; }
+  #toTop.show { display: flex; }
+
+  .contact-section { padding: 3rem 2rem 4rem; text-align: center; border-top: 1px solid #1a1a1a; }
+  .contact-intro { color: #bbb; font-size: 0.95rem; margin-bottom: 1.25rem; }
+  .btn-contact {
+    background: transparent; color: #00e5ff; font-weight: 900; font-size: 0.95rem;
+    padding: 0.9rem 2rem; border: 3px solid #00e5ff; border-radius: 6px; cursor: pointer;
+    text-transform: uppercase; letter-spacing: 0.06em; font-family: 'Inter', sans-serif;
+    transition: box-shadow 0.2s, transform 0.15s, background 0.2s;
+  }
+  .btn-contact:hover { box-shadow: 0 0 24px -4px #00e5ff; transform: translateY(-2px); background: rgba(0,229,255,0.08); }
+  .contact-form { max-width: 460px; margin: 1.5rem auto 0; display: flex; flex-direction: column; gap: 0.75rem; text-align: left; }
+  .contact-form input, .contact-form textarea {
+    width: 100%; background: #1a1a1a; border: 2px solid #333; color: #fff;
+    font-size: 0.95rem; padding: 0.85rem 1rem; border-radius: 6px; outline: none; font-family: 'Inter', sans-serif;
+  }
+  .contact-form input:focus, .contact-form textarea:focus { border-color: #00e5ff; }
+  .contact-form textarea { resize: vertical; min-height: 110px; }
+  .contact-form input::placeholder, .contact-form textarea::placeholder { color: #666; }
+  .btn-contact-submit {
+    background-color: #00e5ff; color: #000; font-weight: 900; font-size: 0.95rem;
+    padding: 0.9rem 1.75rem; border: 3px solid #00e5ff; border-radius: 6px; cursor: pointer;
+    text-transform: uppercase; letter-spacing: 0.06em; font-family: 'Inter', sans-serif;
+    box-shadow: 0 0 18px -4px #00e5ff; transition: box-shadow 0.2s, transform 0.15s;
+  }
+  .btn-contact-submit:hover { box-shadow: 0 0 30px 0 #00e5ff; transform: translateY(-2px); }
+  .contact-success {
+    max-width: 460px; margin: 1.5rem auto 0; background: #001a0a; border: 2px solid #00e676;
+    border-radius: 10px; padding: 1.5rem; color: #00e676; font-weight: 700;
+  }
+
+  @media (max-width: 600px) {
+    body { overflow-x: hidden; }
+    nav { padding: 1rem 1.1rem; }
+    h1 { font-size: clamp(1.7rem, 7.5vw, 2.6rem); letter-spacing: -1px; }
+    .kw { white-space: normal; }
+    .hero { padding: 2.5rem 1.1rem 2rem; }
+    .hero-sub { font-size: 0.95rem; }
+    .section { padding: 3rem 1.1rem; }
+    .cta-section { padding: 3.5rem 1.1rem; }
+    h2 { font-size: clamp(1.6rem, 7vw, 2.4rem); }
+    .cta-h2 { font-size: clamp(1.9rem, 8vw, 3rem); }
+  }
+</style>
+</head>
+<body>
+
+<div style="background:linear-gradient(90deg,#f9a826,#e040fb,#00e5ff);height:4px;width:100%"></div>
+<nav>
+  <div class="nav-title">Small Businesses &amp; Freelancers · In Charlotte County, FL</div>
+  <div class="audience">
+    <span style="color:#f9a826;border-color:#f9a826">Handymen</span>
+    <span style="color:#e040fb;border-color:#e040fb">Lawn Services</span>
+    <span style="color:#00e5ff;border-color:#00e5ff">Pool Services</span>
+    <span style="color:#00e676;border-color:#00e676">House Cleaners</span>
+    <span style="color:#4d7cff;border-color:#4d7cff">Petsitters</span>
+    <span style="color:#ff5252;border-color:#ff5252">Small Business Owners</span>
+  </div>
+  <div class="ticker" onclick="document.getElementById('apply').scrollIntoView({behavior:'smooth'})">
+    <div class="ticker-track">
+      <span class="tk" style="color:#f9a826">FREE WEBSITE DESIGN GIVEAWAY</span><span class="sep">✦</span>
+      <span class="tk" style="color:#e040fb">FREE WEBSITE DESIGN GIVEAWAY</span><span class="sep">✦</span>
+      <span class="tk" style="color:#00e5ff">FREE WEBSITE DESIGN GIVEAWAY</span><span class="sep">✦</span>
+      <span class="tk" style="color:#00e676">FREE WEBSITE DESIGN GIVEAWAY</span><span class="sep">✦</span>
+      <span class="tk" style="color:#f9a826">FREE WEBSITE DESIGN GIVEAWAY</span><span class="sep">✦</span>
+      <span class="tk" style="color:#e040fb">FREE WEBSITE DESIGN GIVEAWAY</span><span class="sep">✦</span>
+      <span class="tk" style="color:#00e5ff">FREE WEBSITE DESIGN GIVEAWAY</span><span class="sep">✦</span>
+      <span class="tk" style="color:#00e676">FREE WEBSITE DESIGN GIVEAWAY</span><span class="sep">✦</span>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="badge" style="background-color: rgb(0, 229, 255); color: #000">Only<br>2 Spots Available<br>Small Biz + Freelancers</div>
+  <h1>
+    Is Your Business<br>
+    <span class="grad-y" style="background:linear-gradient(100deg,#ffd23f,#00e5ff,#b06bff,#e040fb);-webkit-background-clip:text;background-clip:text">Living on <span class="kw">Facebook &amp; NextDoor</span></span><br>
+    <span class="grad-p" style="background:linear-gradient(90deg,#ffe14d,#f9a826,#ff5252);-webkit-background-clip:text;background-clip:text">When You Deserve More?</span>
+  </h1>
+  <p class="hero-sub">A Facebook page is not a website — and it's costing you customers. Businesses with a professional website <strong style="color:#f9a826">drive more traffic</strong>, <strong style="color:#e040fb">increase revenue</strong>, and <strong style="color:#00e676">look credible</strong> the moment someone searches for them. I'm giving away <strong style="color:#fff">2 custom websites completely free</strong> to grow my portfolio. You get a $200+ site. I get the portfolio piece I need. Everyone wins.</p>
+  <div class="hero-btns">
+    <button class="btn-secondary" onclick="document.getElementById('what').scrollIntoView({behavior:'smooth'})">See What You Get</button>
+    <button class="btn-interested" onclick="window.location.href='questionnaire.html'">I'm Interested!</button>
+  </div>
+  <p style="font-size:0.85rem;color:#999;margin-top:0.5rem">Applicants chosen on Friday, June 5, 2026.</p>
+</section>
+
+<div class="divider"></div>
+
+<section class="section" id="what">
+  <div class="tag">What You Get</div>
+  <h2>A Custom Website.<br>Built for Your Business.</h2>
+  <div class="pages-grid">
+    <div class="pg-card pg-1">
+      <div class="pg-num">01</div>
+      <div class="pg-title" style="color:#00e5ff">Homepage</div>
+      <div class="pg-desc">A high-impact landing page built to grab attention and turn visitors into customers.</div>
+    </div>
+    <div class="pg-card pg-2">
+      <div class="pg-num">02</div>
+      <div class="pg-title" style="color:#e040fb">Services Page</div>
+      <div class="pg-desc">A clear, compelling layout of your offerings designed to move people toward booking.</div>
+    </div>
+    <div class="pg-card pg-3">
+      <div class="pg-num">03</div>
+      <div class="pg-title" style="color:#00e676">About &amp; Contact</div>
+      <div class="pg-desc">Builds trust with your story and gives customers a direct line to reach you.</div>
+    </div>
+  </div>
+
+  <div class="deal-box">
+    <div class="tag" style="margin-bottom:0.5rem">The Deal — No Catch</div>
+    <h3 style="font-family:'Archivo Black',sans-serif;font-size:1.5rem;margin:0 0 0.5rem;letter-spacing:-0.5px;color:#fff">Simple. Honest. Free.</h3>
+    <p style="color:#bbb;font-size:0.9rem;line-height:1.6;">You cover only the running costs to keep it online — 
+website hosting (about $5–10/month) and your domain name (about $12–15/year).
+Everything else — design, code, setup, and delivery of your three-page site — is on me.</p>
+    <div class="deal-grid">
+      <div class="deal-item"><div class="dl">Design Fee</div><div class="dv green">$0.00</div></div>
+      <div class="deal-item"><div class="dl">Est. Value</div><div class="dv yellow">$200+</div></div>
+      <div class="deal-item"><div class="dl">Ownership</div><div class="dv pink">100% Yours</div></div>
+
+    </div>
+  </div>
+
+  <div class="ask-box">
+    <div class="tag" style="color:#f9a826">What I Ask in Return</div>
+    <ul class="ask-list">
+      <li><span class="tick">✦</span> An honest testimonial after launch</li>
+      <li><span class="tick">✦</span> Permission to feature your site in my portfolio</li>
+      <li><span class="tick">✦</span> That's it. Seriously.</li>
+    </ul>
+  </div>
+
+  <div class="tag" style="color:#e040fb;margin-bottom:1.25rem">FAQ</div>
+  <div class="faq-item" onclick="toggleFaq(this)" style="--fq:#f9a826">
+    <div class="faq-q">Is this actually free? <span class="arrow">›</span></div>
+    <div class="faq-a">Yes — my design and development work costs you nothing. The only thing you cover are the running costs to keep your site online: website hosting (about $5–10/month) and a domain name (about $12–15/year). I'll point you to the most affordable, reliable options.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)" style="--fq:#e040fb">
+    <div class="faq-q">Why is it limited to only 2? <span class="arrow">›</span></div>
+    <div class="faq-a">I'm building out my portfolio, so I'm only taking on two projects at no charge — enough to create real, polished work I can show future clients without spreading myself thin. You get a free site, I get the portfolio piece I need. Once both spots are filled, the offer closes.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)" style="--fq:#00e5ff">
+    <div class="faq-q">Who is this for? <span class="arrow">›</span></div>
+    <div class="faq-a">Small businesses and freelancers with no website, or those relying solely on a Facebook page. Think salons, contractors, tutors, consultants, food vendors, photographers, cleaners — anyone who serves customers locally or online but lacks a proper web presence.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)" style="--fq:#00e676">
+    <div class="faq-q">Will my site look good on a phone? <span class="arrow">›</span></div>
+    <div class="faq-a">Absolutely. Every site I build is fully responsive and mobile-friendly — it will look sharp and work perfectly on phones, tablets, and desktops.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)" style="--fq:#b06bff">
+    <div class="faq-q">How long does it take? <span class="arrow">›</span></div>
+    <div class="faq-a">Typically 1–2 weeks from kickoff to delivery, depending on how quickly we can align on content and feedback.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)" style="--fq:#ff5252">
+    <div class="faq-q">How can I edit my site later? <span class="arrow">›</span></div>
+    <div class="faq-a">The finished site is 100% yours — it's simple HTML files that you (or any developer you bring on) can edit directly, and you're free to host it or move it anywhere. One thing to know up front: I don't make changes or tweaks myself after handoff, so what you receive is yours to run with.</div>
+  </div>
+</section>
+
+<section class="cta-section" id="apply">
+  <div class="badge" style="background:#f9a826;color:#000;margin-bottom:1.5rem">Only 2 Spots Available</div>
+  <h2 class="cta-h2">Ready to Get Your<br><span class="grad-y">Free Website?</span></h2>
+  <p class="cta-sub">Fill out a short questionnaire — I'm choosing 2 spots and will notify the selected contacts on
+ Friday, June 5, 2026.</p>
+  <a class="btn-submit" href="questionnaire.html" style="text-decoration:none;">I'm Interested — Apply</a>
+  <p style="font-size:0.75rem;color:#666;margin-top:1rem">No spam. No credit card. No nonsense.No catch.</p>
+</section>
+
+<section class="contact-section" id="contact">
+  <p class="contact-intro">Not ready to apply, or just have a question first?</p>
+  <button class="btn-contact" id="contactToggle" onclick="toggleContact()">Contact Me With Questions</button>
+  <div class="contact-form" id="contactForm" style="display:none">
+    <input id="c-name" type="text" placeholder="Your name" />
+    <input id="c-email" type="email" placeholder="Your email" />
+    <textarea id="c-message" placeholder="What's your question?"></textarea>
+    <button class="btn-contact-submit" onclick="submitContact()">Send My Question</button>
+  </div>
+  <div class="contact-success" id="contactSuccess" style="display:none">Thanks for reaching out — your message is on its way. I'll respond within 24 hours.</div>
+</section>
+
+<footer>
+  <p>2026 Portfolio Series</p>
+</footer>
+
+<script>
+  function toggleFaq(el) {
+    const ans = el.querySelector('.faq-a');
+    const arr = el.querySelector('.arrow');
+    const isOpen = ans.classList.contains('open');
+    document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+    document.querySelectorAll('.arrow').forEach(a => a.classList.remove('open'));
+    if (!isOpen) { ans.classList.add('open'); arr.classList.add('open'); }
+  }
+  function handleSubmit() {
+    const name = document.getElementById('name-in').value.trim();
+    const email = document.getElementById('email-in').value.trim();
+    if (!name || !email) { alert('Please fill in both fields!'); return; }
+    document.getElementById('form-wrap').style.display = 'none';
+    document.getElementById('success-msg').style.display = 'block';
+  }
+
+  /* ---- Contact form (people with questions, not applicants) ----
+     Posts into the SAME Google Form / responses sheet as applications, but
+     tagged Submission Type = "Contact only" so you can tell them apart and
+     filter. Reuses the main form's fields: Name -> First Name, Email -> Email,
+     Message -> Notes, plus the Submission Type field. See README. */
+  const CONTACT_FORM_ACTION = "https://docs.google.com/forms/d/e/PASTE_YOUR_FORM_ID/formResponse";
+  const CONTACT_ENTRIES = { name: "entry.1000001", email: "entry.1000004", message: "entry.1000022", type: "entry.1000023" };
+
+  function toggleContact() {
+    var f = document.getElementById('contactForm');
+    f.style.display = (f.style.display === 'none' || !f.style.display) ? 'flex' : 'none';
+  }
+  function submitContact() {
+    var name = document.getElementById('c-name').value.trim();
+    var email = document.getElementById('c-email').value.trim();
+    var message = document.getElementById('c-message').value.trim();
+    if (!name || !email || !message) { alert('Please add your name, email, and question.'); return; }
+    if (!CONTACT_FORM_ACTION.includes('PASTE_YOUR_FORM_ID')) {
+      var params = new URLSearchParams();
+      params.append(CONTACT_ENTRIES.name, name);
+      params.append(CONTACT_ENTRIES.email, email);
+      params.append(CONTACT_ENTRIES.message, message);
+      params.append(CONTACT_ENTRIES.type, 'Contact only');
+      fetch(CONTACT_FORM_ACTION, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: params.toString() }).catch(function () {});
+    }
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('contactToggle').style.display = 'none';
+    document.getElementById('contactSuccess').style.display = 'block';
+  }
+
+  window.addEventListener('scroll', function () {
+    var b = document.getElementById('toTop');
+    if (window.scrollY > 500) b.classList.add('show'); else b.classList.remove('show');
+  });
+</script>
+
+<button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+</body>
+</html>
+
+<style id="__om-edit-overrides">
+.badge >:is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote,figcaption,label,span,a,em,strong,small,td,th,caption) { font-family: Tinos !important }
+.badge >:is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote,figcaption,label,span,a,em,strong,small,td,th,caption) { font-family: Inter !important }
+.badge >:is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote,figcaption,label,span,a,em,strong,small,td,th,caption) { font-family: "Archivo Black" !important }
+</style>
