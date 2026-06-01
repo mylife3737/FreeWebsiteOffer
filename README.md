@@ -1,6 +1,6 @@
 # Free Website Offer — Landing Page + Questionnaire
 
-A two-page static site. No build step, no dependencies to install — just HTML
+A 3-page static site. No build step, no dependencies to install — just HTML
 (fonts load from Google Fonts over the web).
 
 - `index.html` — the landing page (the "Free Website Design Giveaway" offer)
@@ -29,12 +29,12 @@ point your domain's DNS to GitHub Pages.
 
 ## Collecting responses (Google Forms → Spreadsheet → email to you)
 
-The questionnaire is already wired to submit to a Google Form. Once you plug in
+The questionnaire is already wired to submit to a Google Sheet. Once you plug in
 your form's IDs, every submission lands in a Google Sheet and emails you.
 
 > **Which account sends the emails:** automatic emails go out from whichever
 > Gmail account owns the Form / Sheet / Apps Script. Do this whole setup while
-> signed into **IsThisMyLife@gmail.com** so that is the "from" address applicants
+> signed into **IsThisMyLife37@gmail.com** so that is the "from" address applicants
 > and contacts see. Your own notification copies are sent to
 > **DianaLeff@gmail.com** (set in the script below). The winner / not-selected
 > drafts also live in that sending account, so send those from there too.
