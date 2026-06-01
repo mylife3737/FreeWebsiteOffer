@@ -1,6 +1,6 @@
 # Free Website Offer — Landing Page + Questionnaire
 
-A two-page static site. No build step, no dependencies to install — just HTML
+A 3-page static site. No build step, no dependencies to install — just HTML
 (fonts load from Google Fonts over the web).
 
 - `index.html` — the landing page (the "Free Website Design Giveaway" offer)
