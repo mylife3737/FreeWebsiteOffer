@@ -340,6 +340,15 @@ Everything else — design, code, setup, and delivery of your three-page site �
   <div class="tag" style="color:#e040fb;margin-bottom:1.25rem">FAQ</div>
   <div class="faq-item" onclick="toggleFaq(this)" style="--fq:#f9a826">
     <div class="faq-q">Is this actually free? <span class="arrow">›</span></div>
+    <div class="faq-a">Yes — my design and development work costs you nothing. The only thing you cover are the running costs to keep your site online: website hosting (about $5–10/month) and a domain name (about $12–15/year). I'll point you to the most affordable, reliable options.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)" style="--fq:#e040fb">
+    <div class="faq-q">Why is it limited to only 2? <span class="arrow">›</span></div>
+    <div class="faq-a">I'm building out my portfolio, so I'm only taking on two projects at no charge — enough to create real, polished work I can show future clients without spreading myself thin. You get a free site, I get the portfolio piece I need. Once both spots are filled, the offer closes.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)" style="--fq:#00e5ff">
+    <div class="faq-q">Who is this for? <span class="arrow">›</span></div>
+    <div class="faq-a">Small businesses and freelancers with no website, or those relying solely on a Facebook page. Think salons, contractors, tutors, consultants, food vendors, photographers, cleaners — anyone who serves customers locally or online but lacks a proper web presence.</div>
     <div class="faq-a">Yes — my design and development work costs you nothing. The only thing you cover are the running costs to keep your site online: website hosting (about $5–10/month) and your domain name (about $12–15/year). Everything else is on me.</div>
   </div>
   <div class="faq-item" onclick="toggleFaq(this)" style="--fq:#e040fb">
@@ -360,6 +369,7 @@ Everything else — design, code, setup, and delivery of your three-page site �
   </div>
   <div class="faq-item" onclick="toggleFaq(this)" style="--fq:#ff5252">
     <div class="faq-q">How can I edit my site later? <span class="arrow">›</span></div>
+    <div class="faq-a">The finished site is 100% yours — it's simple HTML files that you (or any developer you bring on) can edit directly, and you're free to host it or move it anywhere. One thing to know up front: I don't make changes or tweaks myself after handoff, so what you receive is yours to run with.</div>
     <div class="faq-a">The finished site is 100% yours — it's simple HTML files that you (or any developer you bring on) can edit directly, and you're free to host it or move it anywhere. One-time handoff, no lock-in.</div>
   </div>
 </section>
@@ -367,6 +377,8 @@ Everything else — design, code, setup, and delivery of your three-page site �
 <section class="cta-section" id="apply">
   <div class="badge" style="background:#f9a826;color:#000;margin-bottom:1.5rem">Only 2 Spots Available</div>
   <h2 class="cta-h2">Ready to Get Your<br><span class="grad-y">Free Website?</span></h2>
+  <p class="cta-sub">Fill out a short questionnaire — I'm choosing 2 spots and will notify the selected contacts on
+ Friday, June 5, 2026.</p>
   <p class="cta-sub">Fill out a short questionnaire — I'm choosing 2 spots and will notify the selected contacts on Friday, June 5, 2026.</p>
   <a class="btn-submit" href="questionnaire.html" style="text-decoration:none;">I'm Interested — Apply</a>
   <p style="font-size:0.75rem;color:#666;margin-top:1rem">No spam. No credit card. No nonsense.No catch.</p>
@@ -428,6 +440,7 @@ Everything else — design, code, setup, and delivery of your three-page site �
       params.append(CONTACT_ENTRIES.email, email);
       params.append(CONTACT_ENTRIES.message, message);
       params.append(CONTACT_ENTRIES.type, 'Contact only');
+      fetch(CONTACT_FORM_ACTION, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: params.toString() }).catch(function () {});
       fetch(CONTACT_FORM_ACTION, { method: 'POST', mode: 'no-cors', body: params.toString() }).catch(function () {});
     }
     document.getElementById('contactForm').style.display = 'none';
