@@ -18,7 +18,7 @@ A two-page static site. No build step, no dependencies to install — just HTML
 6. Wait ~1 minute. Your site will be live at:
    `https://<your-username>.github.io/<repo-name>/`
 
-The landing page loads first; clicking **Reserve My Spot** opens the
+The landing page loads first; clicking **Apply by June 4, 2026** opens the
 questionnaire (`questionnaire.html`) in the same window.
 
 ## Custom domain (optional)
@@ -34,8 +34,8 @@ your form's IDs, every submission lands in a Google Sheet and emails you.
 
 > **Which account sends the emails:** automatic emails go out from whichever
 > Gmail account owns the Form / Sheet / Apps Script. Do this whole setup while
-> signed into **IsThisMyLife@gmail.com** so that is the "from" address applicants
-> and contacts see. Your own notification copies are sent to
+> signed into **IsThisMyLife37@gmail.com** so that is the "from" address applicants
+> and contacts see. Your own notification copies are BCC to
 > **DianaLeff@gmail.com** (set in the script below). The winner / not-selected
 > drafts also live in that sending account, so send those from there too.
 
@@ -117,4 +117,4 @@ Drive — it's no longer used now that everything flows into one sheet.)*
 ## Notes
 
 - The **logo file upload** can't travel through a Google Form. You'll collect the
-  logo separately (ask for it in your follow-up email).
+  logo separately (ask for it in your follow-up email). why not??
