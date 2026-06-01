@@ -14,21 +14,27 @@
     flex-direction: column; text-align: center;
     padding: 1.2rem 2rem; border-bottom: 1px solid rgba(255,255,255,0.08);
     background: rgba(10,10,10,0.55); backdrop-filter: blur(16px) saturate(160%); -webkit-backdrop-filter: blur(16px) saturate(160%);
-    position: sticky; top: 0; z-index: 100; gap: 0.5rem;
+    position: sticky; top: 0; z-index: 100; gap: var(--nav-gap, 0.3rem);
   }
   .nav-title {
-    font-family: 'Archivo Black', sans-serif; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.04em;
+    font-family: 'Archivo Black', sans-serif; font-size: var(--title-size, 0.95rem); text-transform: uppercase; letter-spacing: 0.04em;
     color: #fff; line-height: 1.5;
   }
   .nav-free { display: inline-block; font-size: 1.55rem; font-weight: 900; letter-spacing: 0.02em; }
 
   .audience { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-top: 0.15rem; }
   .audience span {
-    font-size: 0.72rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em;
+    font-size: var(--pill-size, 0.72rem); font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em;
     padding: 0.38rem 0.85rem; border-radius: 999px; border: 1.5px solid; background: #141414;
     transition: transform 0.15s, box-shadow 0.15s;
   }
   .audience span:hover { transform: translateY(-2px); box-shadow: 0 0 14px -2px currentColor; }
+
+  .spots-stripe {
+    background: #00d3b8; color: #03110f; text-align: center; width: 100%;
+    font-family: 'Archivo Black', sans-serif; font-size: 0.92rem; text-transform: uppercase;
+    letter-spacing: 0.06em; padding: 0.7rem 1.5rem;
+  }
 
   .ticker {
     width: 100%; overflow: hidden; white-space: nowrap; cursor: pointer; padding: 0.4rem 0;
@@ -91,6 +97,7 @@
     width: 100%; background: #1a1a1a; border: 2px dashed #333; color: #999;
     padding: 0.85rem 1rem; border-radius: 6px; font-family: 'Inter', sans-serif;
     font-size: 0.85rem; margin-bottom: 1rem; cursor: pointer; transition: border-color 0.2s;
+    display: flex; align-items: center; min-height: 3rem;
   }
   .step input[type="file"]:hover { border-color: var(--accent); }
   .step input[type="file"]::file-selector-button {
@@ -110,6 +117,14 @@
   }
 
   label { display: block; font-size: 0.82rem; color: #999; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.4rem; }
+  label.label-icon { display: flex; align-items: center; flex-wrap: wrap; gap: 0.45rem; line-height: 1.4; margin-bottom: 0.55rem; }
+  label.label-icon svg { flex: none; }
+  .req { color: #ff5252; margin-left: 3px; font-weight: 900; }
+  .cond { color: #aaa; font-weight: 700; text-transform: none; letter-spacing: 0; font-size: 0.72rem; white-space: nowrap; }
+  .reqlegend { max-width: 680px; margin: 1.25rem auto -1rem; padding: 0 2rem; font-size: 0.8rem; color: #888; }
+  .reqlegend b { color: #ff5252; }
+  .hint { font-size: 0.78rem; color: #777; margin: -0.55rem 0 0.95rem; line-height: 1.5; }
+  .audience-label { font-size: 0.66rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.2em; color: #888; margin-top: 0.1rem; }
 
   input[type="text"], input[type="email"], input[type="tel"], textarea, select {
     width: 100%; background: #1a1a1a; border: 2px solid #333; color: #fff;
@@ -160,13 +175,13 @@
 
 <div class="divider-top"></div>
 <nav>
-  <div class="nav-title">Small Businesses &amp; Freelancers · In Charlotte County, FL</div>
+  <div class="nav-title">OPEN TO SMALL BUSINESSES &amp; FREELANCERS · IN CHARLOTTE COUNTY, FL</div>
   <div class="audience">
     <span style="color:#f9a826;border-color:#f9a826">Handymen</span>
     <span style="color:#e040fb;border-color:#e040fb">Lawn Services</span>
     <span style="color:#00e5ff;border-color:#00e5ff">Pool Services</span>
     <span style="color:#00e676;border-color:#00e676">House Cleaners</span>
-    <span style="color:#4d7cff;border-color:#4d7cff">Petsitters</span>
+    <span style="color:#b06bff;border-color:#b06bff">Petsitters</span>
     <span style="color:#ff5252;border-color:#ff5252">Small Business Owners</span>
   </div>
   <div class="ticker" onclick="document.querySelector('.form-section').scrollIntoView({behavior:'smooth'})">
@@ -184,12 +199,16 @@
 </nav>
 
 <section class="hero" style="color: rgb(0, 229, 255)">
-  <div class="badge" style="background-color: rgb(0, 229, 255); color:#0a0a0a">Step 1 of 1 — Takes 3 Minutes</div>
+  <div class="spots-stripe" style="margin-bottom:1.75rem">Step 1 of 1 — Takes 3 Minutes</div>
   <h1>Tell Me About<br><span class="grad-y">Your Business</span></h1>
-  <p class="hero-sub">Fill this out and I'll review your answers —<br>I'm choosing 2 spots and will notify the contact<br>on Friday, June 5, 2026.</p>
+  <p class="hero-sub">Fill this out and I'll review your answers —
+I'm choosing 2 spots and will notify the contacts 
+on Friday, June 5, 2026.</p>
 </section>
 
 <div class="divider"></div>
+
+<p class="reqlegend">Fields marked <b>*</b> are required.</p>
 
 <section class="form-section">
   <div id="q-form">
@@ -199,19 +218,19 @@
       <div class="step-q">Who's the main contact?</div>
       <div class="field-row">
         <div>
-          <label>First Name</label>
+          <label>First Name<span class="req">*</span></label>
           <input type="text" id="fname" placeholder="John" />
         </div>
         <div>
-          <label>Last Name</label>
+          <label>Last Name<span class="req">*</span></label>
           <input type="text" id="lname" placeholder="Smith" />
         </div>
       </div>
       <label>Title / Role</label>
       <input type="text" id="title" placeholder="e.g. Owner, Founder, Operations Manager" />
-      <label>Email Address</label>
+      <label>Email Address<span class="req">*</span></label>
       <input type="email" id="email" placeholder="you@example.com" />
-      <label>Phone Number</label>
+      <label>Phone Number<span class="req">*</span></label>
       <input type="tel" id="phone" placeholder="(813) 555-0100" />
       <label style="margin-top:0.5rem;color:var(--accent)">How do you prefer to be contacted?</label>
       <div class="radio-group" id="contact-pref-group">
@@ -233,15 +252,19 @@
     <div class="step s-pink">
       <div class="step-num" style="color:#e040fb">02 — Your Business</div>
       <div class="step-q">What is your business called and what do you do?</div>
-      <label>Business Name</label>
+      <label>Business Name<span class="req">*</span></label>
       <input type="text" id="biz-name" placeholder="e.g. Smith's Lawn Care" />
-      <label>Type of Business / Services You Offer</label>
+      <label>Type of Business / Services You Offer<span class="req">*</span></label>
       <textarea id="biz-type" placeholder="e.g. Residential lawn mowing, edging, and cleanup in the Brandon area"></textarea>
+      <label>Business Address</label>
+      <input type="text" id="biz-address" placeholder="123 Main St, Punta Gorda, FL 33950" />
+      <label>Business Phone<span class="req">*</span></label>
+      <input type="tel" id="biz-phone" placeholder="(941) 555-0100" />
     </div>
 
     <div class="step s-cyan" style="--accent:#ff6b9d; background: linear-gradient(160deg, rgba(255,107,157,0.13), #100b0e); border-color: rgba(255,107,157,0.38)">
       <div class="step-num" style="color:#ff6b9d">03 — Online Presence</div>
-      <div class="step-q">Where are you at right now?</div>
+      <div class="step-q">Where are you at right now?<span class="req">*</span></div>
       <div class="radio-group" id="presence-group">
         <label class="radio-opt" onclick="selectRadio(this, 'presence-group')">
           <input type="radio" name="presence" value="none" /> No website or social media presence
@@ -253,11 +276,11 @@
           <input type="radio" name="presence" value="both" /> Facebook + other social media, no website
         </label>
       </div>
-      <label style="margin-top:1.25rem">Facebook Page Link</label>
+      <label style="margin-top:1.25rem" class="label-icon"><svg viewBox="0 0 24 24" width="15" height="15" fill="#1877f2"><path d="M24 12c0-6.627-5.373-12-12-12S0 5.373 0 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874V12h3.328l-.532 3.469h-2.796v8.385C19.612 22.954 24 17.99 24 12z"/></svg> Facebook Page Link</label>
       <input type="text" id="social-fb" placeholder="facebook.com/yourbusiness" />
-      <label>Instagram Handle or Link</label>
-      <input type="text" id="social-ig" placeholder="@yourbusiness" />
-      <label>Other Social Link</label>
+      <label class="label-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="#00b246"><path d="M12 2.5 2 10.2h2.6V21h5.1v-6.1h4.6V21h5.1V10.2H22z"/></svg> Nextdoor Profile Link</label>
+      <input type="text" id="social-nextdoor" placeholder="nextdoor.com/pages/yourbusiness" />
+      <label class="label-icon"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#00e5ff" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Other Social Link</label>
       <input type="text" id="social-other" placeholder="TikTok, Google Business, Yelp, etc." />
     </div>
 
@@ -282,13 +305,13 @@
 
     <div class="step s-orange" style="--accent:#ff5252; background: linear-gradient(160deg, rgba(255,82,82,0.13), #100b0b); border-color: rgba(255,82,82,0.38)">
       <div class="step-num" style="color:#ff5252">05 — Service Area</div>
-      <div class="step-q">What city or area do you serve?</div>
+      <div class="step-q">What city or area do you serve?<span class="req">*</span></div>
       <input type="text" id="service-area" placeholder="e.g. Brandon, FL and surrounding areas" />
     </div>
 
     <div class="step s-pink" style="--accent:#b06bff; background: linear-gradient(160deg, rgba(176,107,255,0.13), #0d0b12); border-color: rgba(176,107,255,0.38)">
       <div class="step-num" style="color:#b06bff">06 — Vibe &amp; Style</div>
-      <div class="step-q">Pick the words that best describe your brand.</div>
+      <div class="step-q">Pick the words that best describe your brand.<span class="req">*</span></div>
       <div class="radio-group" id="vibe-group">
         <label class="radio-opt" onclick="selectRadio(this, 'vibe-group')">
           <input type="radio" name="vibe" value="professional" /> Clean. Professional.
@@ -306,13 +329,14 @@
           <input type="radio" name="vibe" value="minimal" /> Simple. Minimal.
         </label>
       </div>
-      <label style="margin-top:1.25rem">Any websites you like the look of? (paste links if you have them)</label>
+      <label style="margin-top:1.25rem">ANY WEBSITES YOU LIKE THE LOOK OF?
+(PASTE LINKS IF YOU HAVE THEM)</label>
       <textarea id="inspo" placeholder="e.g. I like how abc.com looks, or I want something similar to xyz.com..."></textarea>
     </div>
 
     <div class="step s-cyan" style="--accent:#00d3b8; background: linear-gradient(160deg, rgba(0,211,184,0.13), #0a100e); border-color: rgba(0,211,184,0.38)">
       <div class="step-num" style="color:#00d3b8">07 — Colors &amp; Branding</div>
-      <div class="step-q">Do you have a logo or existing color scheme?</div>
+      <div class="step-q">Do you have a logo or existing color scheme?<span class="req">*</span></div>
       <div class="radio-group" id="logo-group">
         <label class="radio-opt" onclick="selectRadio(this, 'logo-group')">
           <input type="radio" name="logo" value="yes-both" /> Yes — I have a logo and brand colors
@@ -329,12 +353,20 @@
       </div>
       <label style="margin-top:1.25rem">Describe your preferred colors or paste any hex/brand codes if you have them</label>
       <input type="text" id="colors" placeholder="e.g. Dark green and white, or #2d6a2d and #ffffff" />
-      <label style="margin-top:0.5rem">Upload your logo (if you have one)</label>
-      <input type="file" id="logo-upload" accept="image/*" />
+      <label style="margin-top:0.5rem">Upload Your Logo <span class="cond">— one image</span></label>
+      <input type="file" id="logo-upload" accept="image/*" onchange="capFiles(this, 1)" />
+    </div>
+
+    <div class="step s-green" style="--accent:#a3e635; background: linear-gradient(160deg, rgba(163,230,53,0.12), #0c1006); border-color: rgba(163,230,53,0.36)">
+      <div class="step-num" style="color:#a3e635">08 — Project Photos</div>
+      <div class="step-q" style="margin-bottom:0.85rem">Got photos we can feature on your site?</div>
+      <label style="margin-bottom:0.55rem">UPLOAD UP TO 3 PHOTOS — YOUR WORK, YOURSELF, STOREFRONT, ETC.</label>
+      <p class="hint" style="margin:0 0 1.1rem">Optional, but they make a big difference. Use clear, well-lit, high-resolution shots straight from your phone or camera — no screenshots or blurry pics. Include metadata if possible. These may be used directly in your design.</p>
+      <input type="file" id="gallery-upload" accept="image/*" multiple onchange="capFiles(this, 3)" />
     </div>
 
     <div class="step s-pink" style="--accent:#4d7cff; background: linear-gradient(160deg, rgba(77,124,255,0.13), #0b0c10); border-color: rgba(77,124,255,0.38)">
-      <div class="step-num" style="color:#4d7cff">08 — Must-Haves</div>
+      <div class="step-num" style="color:#4d7cff">09 — Must-Haves</div>
       <div class="step-q">Any 100% requirements for the site?</div>
       <label>NON-NEGOTIABLES —
 LIST UP TO 3 THINGS YOUR SITE ABSOLUTELY MUST HAVE</label>
@@ -345,21 +377,21 @@ LIST UP TO 3 THINGS YOUR SITE ABSOLUTELY MUST HAVE</label>
     </div>
 
     <div class="step s-green" style="--accent:#ff5cc8; background: linear-gradient(160deg, rgba(255,92,200,0.12), #100b0e); border-color: rgba(255,92,200,0.36)">
-      <div class="step-num" style="color:#ff5cc8">09 — Anything Else</div>
+      <div class="step-num" style="color:#ff5cc8">10 — Anything Else</div>
       <div class="step-q">Anything you want me to know before we get started?</div>
       <textarea id="notes" placeholder="Specific features, questions, things that are important to you..."></textarea>
     </div>
 
     <div class="submit-wrap">
       <button class="btn-submit" onclick="submitForm()">Submit Application</button>
-      <p style="font-size:0.75rem;color:#555;margin-top:1rem">No credit card. No spam. No nonsense. No catch.</p>
+      <p style="font-size:0.75rem;color:#555;margin-top:1rem">No credit card. No nonsense. No catch.</p>
     </div>
 
   </div>
 
   <div class="success-box" id="success-box">
-    <h3>You're Reserved!</h3>
-    <p>Thanks for filling that out. I'll review your answers and reach out within 24 hours to confirm your spot and kick things off.</p>
+    <h3>Submission Received</h3>
+    <p>Thanks for filling that out. Selected applicants will be notified on Friday, June 5, 2026.</p>
   </div>
 
 </section>
@@ -399,9 +431,11 @@ LIST UP TO 3 THINGS YOUR SITE ABSOLUTELY MUST HAVE</label>
     "contact-pref":  "entry.1000006",
     "biz-name":      "entry.1000007",
     "biz-type":      "entry.1000008",
+    "biz-address":   "entry.1000024",
+    "biz-phone":     "entry.1000025",
     presence:        "entry.1000009",
     "social-fb":     "entry.1000010",
-    "social-ig":     "entry.1000011",
+    "social-nextdoor": "entry.1000011",
     "social-other":  "entry.1000012",
     goal:            "entry.1000013",
     "service-area":  "entry.1000014",
@@ -412,9 +446,17 @@ LIST UP TO 3 THINGS YOUR SITE ABSOLUTELY MUST HAVE</label>
     "req-1":         "entry.1000019",
     "req-2":         "entry.1000020",
     "req-3":         "entry.1000021",
-    notes:           "entry.1000022",
-    "submission-type": "entry.1000023"
+    notes:           "entry.1000022"
   };
+
+  function capFiles(input, max) {
+    // Keep only the first `max` files — don't clear the whole selection.
+    if (input.files.length > max) {
+      const dt = new DataTransfer();
+      for (let i = 0; i < max; i++) dt.items.add(input.files[i]);
+      input.files = dt.files;
+    }
+  }
 
   function selectRadio(el, groupId) {
     document.querySelectorAll('#' + groupId + ' .radio-opt').forEach(o => o.classList.remove('selected'));
@@ -431,25 +473,77 @@ LIST UP TO 3 THINGS YOUR SITE ABSOLUTELY MUST HAVE</label>
   }
 
   function submitForm() {
-    const required = ['fname', 'lname', 'email', 'biz-name', 'biz-type', 'service-area'];
+    const required = ['fname', 'lname', 'email', 'phone', 'biz-name', 'biz-type', 'biz-phone', 'service-area'];
     for (let id of required) {
       if (!document.getElementById(id).value.trim()) {
-        alert('Please fill in all required fields before submitting.');
+        alert('Please fill in all required fields (marked *) before submitting.');
         document.getElementById(id).focus();
         return;
       }
+    }
+
+    // Required: online presence selection
+    const presence = radioVal('presence');
+    if (!presence) {
+      alert('Please tell me where you are at right now (Online Presence).');
+      document.getElementById('presence-group').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    // Conditional: if they have a Facebook page, the link is required
+    if ((presence === 'facebook' || presence === 'both') && !fieldVal('social-fb')) {
+      alert('Please add your Facebook page link before submitting.');
+      document.getElementById('social-fb').focus();
+      return;
+    }
+    // Conditional: if they also have other social media, an other-social link is required
+    if (presence === 'both' && !fieldVal('social-nextdoor') && !fieldVal('social-other')) {
+      alert('Please add at least one other social media link (Nextdoor or Other) before submitting.');
+      document.getElementById('social-nextdoor').focus();
+      return;
+    }
+    // Required: brand vibe selection
+    if (!radioVal('vibe')) {
+      alert('Please pick the words that best describe your brand.');
+      document.getElementById('vibe-group').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    // Required: logo / color status selection
+    const logo = radioVal('logo');
+    if (!logo) {
+      alert('Please tell me whether you have a logo or color scheme.');
+      document.getElementById('logo-group').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    // Conditional: if they said they have a logo, an upload is required
+    if ((logo === 'yes-both' || logo === 'yes-logo') && !document.getElementById('logo-upload').files.length) {
+      alert('You said you have a logo — please upload it before submitting.');
+      document.getElementById('logo-upload').focus();
+      return;
+    }
+    // Cap gallery photos at 3 (also enforced instantly on selection)
+    if (document.getElementById('gallery-upload').files.length > 3) {
+      alert('Please upload no more than 3 photos.');
+      document.getElementById('gallery-upload').focus();
+      return;
+    }
+    // Logo must be a single image
+    if (document.getElementById('logo-upload').files.length > 1) {
+      alert('Please upload just one logo image.');
+      document.getElementById('logo-upload').focus();
+      return;
     }
 
     const data = {
       fname: fieldVal('fname'), lname: fieldVal('lname'), title: fieldVal('title'),
       email: fieldVal('email'), phone: fieldVal('phone'), 'contact-pref': radioVal('contact-pref'),
       'biz-name': fieldVal('biz-name'), 'biz-type': fieldVal('biz-type'),
+      'biz-address': fieldVal('biz-address'), 'biz-phone': fieldVal('biz-phone'),
       presence: radioVal('presence'), 'social-fb': fieldVal('social-fb'),
-      'social-ig': fieldVal('social-ig'), 'social-other': fieldVal('social-other'),
+      'social-nextdoor': fieldVal('social-nextdoor'), 'social-other': fieldVal('social-other'),
       goal: radioVal('goal'), 'service-area': fieldVal('service-area'),
       vibe: radioVal('vibe'), inspo: fieldVal('inspo'), logo: radioVal('logo'),
       colors: fieldVal('colors'), 'req-1': fieldVal('req-1'), 'req-2': fieldVal('req-2'),
-      'req-3': fieldVal('req-3'), notes: fieldVal('notes'), 'submission-type': 'Application'
+      'req-3': fieldVal('req-3'), notes: fieldVal('notes')
     };
 
     // Send to Google Forms (only once you've filled in the config above).
@@ -469,6 +563,527 @@ LIST UP TO 3 THINGS YOUR SITE ABSOLUTELY MUST HAVE</label>
     document.getElementById('success-box').style.display = 'block';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
+</script>
+
+<div id="tweak-root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel">
+const __TWEAKS_STYLE = `
+  .twk-panel{position:fixed;right:16px;bottom:16px;z-index:2147483646;width:280px;
+    max-height:calc(100vh - 32px);display:flex;flex-direction:column;
+    transform:scale(var(--dc-inv-zoom,1));transform-origin:bottom right;
+    background:rgba(250,249,247,.78);color:#29261b;
+    -webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%);
+    border:.5px solid rgba(255,255,255,.6);border-radius:14px;
+    box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 12px 40px rgba(0,0,0,.18);
+    font:11.5px/1.4 ui-sans-serif,system-ui,-apple-system,sans-serif;overflow:hidden}
+  .twk-hd{display:flex;align-items:center;justify-content:space-between;
+    padding:10px 8px 10px 14px;cursor:move;user-select:none}
+  .twk-hd b{font-size:12px;font-weight:600;letter-spacing:.01em}
+  .twk-x{appearance:none;border:0;background:transparent;color:rgba(41,38,27,.55);
+    width:22px;height:22px;border-radius:6px;cursor:default;font-size:13px;line-height:1}
+  .twk-x:hover{background:rgba(0,0,0,.06);color:#29261b}
+  .twk-body{padding:2px 14px 14px;display:flex;flex-direction:column;gap:10px;
+    overflow-y:auto;overflow-x:hidden;min-height:0;
+    scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.15) transparent}
+  .twk-body::-webkit-scrollbar{width:8px}
+  .twk-body::-webkit-scrollbar-track{background:transparent;margin:2px}
+  .twk-body::-webkit-scrollbar-thumb{background:rgba(0,0,0,.15);border-radius:4px;
+    border:2px solid transparent;background-clip:content-box}
+  .twk-body::-webkit-scrollbar-thumb:hover{background:rgba(0,0,0,.25);
+    border:2px solid transparent;background-clip:content-box}
+  .twk-row{display:flex;flex-direction:column;gap:5px}
+  .twk-row-h{flex-direction:row;align-items:center;justify-content:space-between;gap:10px}
+  .twk-lbl{display:flex;justify-content:space-between;align-items:baseline;
+    color:rgba(41,38,27,.72)}
+  .twk-lbl>span:first-child{font-weight:500}
+  .twk-val{color:rgba(41,38,27,.5);font-variant-numeric:tabular-nums}
+
+  .twk-sect{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+    color:rgba(41,38,27,.45);padding:10px 0 0}
+  .twk-sect:first-child{padding-top:0}
+
+  .twk-field{appearance:none;box-sizing:border-box;width:100%;min-width:0;height:26px;padding:0 8px;
+    border:.5px solid rgba(0,0,0,.1);border-radius:7px;
+    background:rgba(255,255,255,.6);color:inherit;font:inherit;outline:none}
+  .twk-field:focus{border-color:rgba(0,0,0,.25);background:rgba(255,255,255,.85)}
+  select.twk-field{padding-right:22px;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='rgba(0,0,0,.5)' d='M0 0h10L5 6z'/></svg>");
+    background-repeat:no-repeat;background-position:right 8px center}
+
+  .twk-slider{appearance:none;-webkit-appearance:none;width:100%;height:4px;margin:6px 0;
+    border-radius:999px;background:rgba(0,0,0,.12);outline:none}
+  .twk-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
+    width:14px;height:14px;border-radius:50%;background:#fff;
+    border:.5px solid rgba(0,0,0,.12);box-shadow:0 1px 3px rgba(0,0,0,.2);cursor:default}
+  .twk-slider::-moz-range-thumb{width:14px;height:14px;border-radius:50%;
+    background:#fff;border:.5px solid rgba(0,0,0,.12);box-shadow:0 1px 3px rgba(0,0,0,.2);cursor:default}
+
+  .twk-seg{position:relative;display:flex;padding:2px;border-radius:8px;
+    background:rgba(0,0,0,.06);user-select:none}
+  .twk-seg-thumb{position:absolute;top:2px;bottom:2px;border-radius:6px;
+    background:rgba(255,255,255,.9);box-shadow:0 1px 2px rgba(0,0,0,.12);
+    transition:left .15s cubic-bezier(.3,.7,.4,1),width .15s}
+  .twk-seg.dragging .twk-seg-thumb{transition:none}
+  .twk-seg button{appearance:none;position:relative;z-index:1;flex:1;border:0;
+    background:transparent;color:inherit;font:inherit;font-weight:500;min-height:22px;
+    border-radius:6px;cursor:default;padding:4px 6px;line-height:1.2;
+    overflow-wrap:anywhere}
+
+  .twk-toggle{position:relative;width:32px;height:18px;border:0;border-radius:999px;
+    background:rgba(0,0,0,.15);transition:background .15s;cursor:default;padding:0}
+  .twk-toggle[data-on="1"]{background:#34c759}
+  .twk-toggle i{position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;
+    background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:transform .15s}
+  .twk-toggle[data-on="1"] i{transform:translateX(14px)}
+
+  .twk-num{display:flex;align-items:center;box-sizing:border-box;min-width:0;height:26px;padding:0 0 0 8px;
+    border:.5px solid rgba(0,0,0,.1);border-radius:7px;background:rgba(255,255,255,.6)}
+  .twk-num-lbl{font-weight:500;color:rgba(41,38,27,.6);cursor:ew-resize;
+    user-select:none;padding-right:8px}
+  .twk-num input{flex:1;min-width:0;height:100%;border:0;background:transparent;
+    font:inherit;font-variant-numeric:tabular-nums;text-align:right;padding:0 8px 0 0;
+    outline:none;color:inherit;-moz-appearance:textfield}
+  .twk-num input::-webkit-inner-spin-button,.twk-num input::-webkit-outer-spin-button{
+    -webkit-appearance:none;margin:0}
+  .twk-num-unit{padding-right:8px;color:rgba(41,38,27,.45)}
+
+  .twk-btn{appearance:none;height:26px;padding:0 12px;border:0;border-radius:7px;
+    background:rgba(0,0,0,.78);color:#fff;font:inherit;font-weight:500;cursor:default}
+  .twk-btn:hover{background:rgba(0,0,0,.88)}
+  .twk-btn.secondary{background:rgba(0,0,0,.06);color:inherit}
+  .twk-btn.secondary:hover{background:rgba(0,0,0,.1)}
+
+  .twk-swatch{appearance:none;-webkit-appearance:none;width:56px;height:22px;
+    border:.5px solid rgba(0,0,0,.1);border-radius:6px;padding:0;cursor:default;
+    background:transparent;flex-shrink:0}
+  .twk-swatch::-webkit-color-swatch-wrapper{padding:0}
+  .twk-swatch::-webkit-color-swatch{border:0;border-radius:5.5px}
+  .twk-swatch::-moz-color-swatch{border:0;border-radius:5.5px}
+
+  .twk-chips{display:flex;gap:6px}
+  .twk-chip{position:relative;appearance:none;flex:1;min-width:0;height:46px;
+    padding:0;border:0;border-radius:6px;overflow:hidden;cursor:default;
+    box-shadow:0 0 0 .5px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.06);
+    transition:transform .12s cubic-bezier(.3,.7,.4,1),box-shadow .12s}
+  .twk-chip:hover{transform:translateY(-1px);
+    box-shadow:0 0 0 .5px rgba(0,0,0,.18),0 4px 10px rgba(0,0,0,.12)}
+  .twk-chip[data-on="1"]{box-shadow:0 0 0 1.5px rgba(0,0,0,.85),
+    0 2px 6px rgba(0,0,0,.15)}
+  .twk-chip>span{position:absolute;top:0;bottom:0;right:0;width:34%;
+    display:flex;flex-direction:column;box-shadow:-1px 0 0 rgba(0,0,0,.1)}
+  .twk-chip>span>i{flex:1;box-shadow:0 -1px 0 rgba(0,0,0,.1)}
+  .twk-chip>span>i:first-child{box-shadow:none}
+  .twk-chip svg{position:absolute;top:6px;left:6px;width:13px;height:13px;
+    filter:drop-shadow(0 1px 1px rgba(0,0,0,.3))}
+`;
+
+// ── useTweaks ───────────────────────────────────────────────────────────────
+// Single source of truth for tweak values. setTweak persists via the host
+// (__edit_mode_set_keys → host rewrites the EDITMODE block on disk).
+function useTweaks(defaults) {
+  const [values, setValues] = React.useState(defaults);
+  // Accepts either setTweak('key', value) or setTweak({ key: value, ... }) so a
+  // useState-style call doesn't write a "[object Object]" key into the persisted
+  // JSON block.
+  const setTweak = React.useCallback((keyOrEdits, val) => {
+    const edits = typeof keyOrEdits === 'object' && keyOrEdits !== null
+      ? keyOrEdits : { [keyOrEdits]: val };
+    setValues((prev) => ({ ...prev, ...edits }));
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits }, '*');
+    // Same-window signal so in-page listeners (deck-stage rail thumbnails)
+    // can react — the parent message only reaches the host, not peers.
+    window.dispatchEvent(new CustomEvent('tweakchange', { detail: edits }));
+  }, []);
+  return [values, setTweak];
+}
+
+// ── TweaksPanel ─────────────────────────────────────────────────────────────
+// Floating shell. Registers the protocol listener BEFORE announcing
+// availability — if the announce ran first, the host's activate could land
+// before our handler exists and the toolbar toggle would silently no-op.
+// The close button posts __edit_mode_dismissed so the host's toolbar toggle
+// flips off in lockstep; the host echoes __deactivate_edit_mode back which
+// is what actually hides the panel.
+function TweaksPanel({ title = 'Tweaks', children }) {
+  const [open, setOpen] = React.useState(false);
+  const dragRef = React.useRef(null);
+  const offsetRef = React.useRef({ x: 16, y: 16 });
+  const PAD = 16;
+
+  const clampToViewport = React.useCallback(() => {
+    const panel = dragRef.current;
+    if (!panel) return;
+    const w = panel.offsetWidth, h = panel.offsetHeight;
+    const maxRight = Math.max(PAD, window.innerWidth - w - PAD);
+    const maxBottom = Math.max(PAD, window.innerHeight - h - PAD);
+    offsetRef.current = {
+      x: Math.min(maxRight, Math.max(PAD, offsetRef.current.x)),
+      y: Math.min(maxBottom, Math.max(PAD, offsetRef.current.y)),
+    };
+    panel.style.right = offsetRef.current.x + 'px';
+    panel.style.bottom = offsetRef.current.y + 'px';
+  }, []);
+
+  React.useEffect(() => {
+    if (!open) return;
+    clampToViewport();
+    if (typeof ResizeObserver === 'undefined') {
+      window.addEventListener('resize', clampToViewport);
+      return () => window.removeEventListener('resize', clampToViewport);
+    }
+    const ro = new ResizeObserver(clampToViewport);
+    ro.observe(document.documentElement);
+    return () => ro.disconnect();
+  }, [open, clampToViewport]);
+
+  React.useEffect(() => {
+    const onMsg = (e) => {
+      const t = e?.data?.type;
+      if (t === '__activate_edit_mode') setOpen(true);
+      else if (t === '__deactivate_edit_mode') setOpen(false);
+    };
+    window.addEventListener('message', onMsg);
+    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+    return () => window.removeEventListener('message', onMsg);
+  }, []);
+
+  const dismiss = () => {
+    setOpen(false);
+    window.parent.postMessage({ type: '__edit_mode_dismissed' }, '*');
+  };
+
+  const onDragStart = (e) => {
+    const panel = dragRef.current;
+    if (!panel) return;
+    const r = panel.getBoundingClientRect();
+    const sx = e.clientX, sy = e.clientY;
+    const startRight = window.innerWidth - r.right;
+    const startBottom = window.innerHeight - r.bottom;
+    const move = (ev) => {
+      offsetRef.current = {
+        x: startRight - (ev.clientX - sx),
+        y: startBottom - (ev.clientY - sy),
+      };
+      clampToViewport();
+    };
+    const up = () => {
+      window.removeEventListener('mousemove', move);
+      window.removeEventListener('mouseup', up);
+    };
+    window.addEventListener('mousemove', move);
+    window.addEventListener('mouseup', up);
+  };
+
+  if (!open) return null;
+  return (
+    <>
+      <style>{__TWEAKS_STYLE}</style>
+      <div ref={dragRef} className="twk-panel" data-omelette-chrome=""
+           style={{ right: offsetRef.current.x, bottom: offsetRef.current.y }}>
+        <div className="twk-hd" onMouseDown={onDragStart}>
+          <b>{title}</b>
+          <button className="twk-x" aria-label="Close tweaks"
+                  onMouseDown={(e) => e.stopPropagation()}
+                  onClick={dismiss}>✕</button>
+        </div>
+        <div className="twk-body">
+          {children}
+        </div>
+      </div>
+    </>
+  );
+}
+
+// ── Layout helpers ──────────────────────────────────────────────────────────
+
+function TweakSection({ label, children }) {
+  return (
+    <>
+      <div className="twk-sect">{label}</div>
+      {children}
+    </>
+  );
+}
+
+function TweakRow({ label, value, children, inline = false }) {
+  return (
+    <div className={inline ? 'twk-row twk-row-h' : 'twk-row'}>
+      <div className="twk-lbl">
+        <span>{label}</span>
+        {value != null && <span className="twk-val">{value}</span>}
+      </div>
+      {children}
+    </div>
+  );
+}
+
+// ── Controls ────────────────────────────────────────────────────────────────
+
+function TweakSlider({ label, value, min = 0, max = 100, step = 1, unit = '', onChange }) {
+  return (
+    <TweakRow label={label} value={`${value}${unit}`}>
+      <input type="range" className="twk-slider" min={min} max={max} step={step}
+             value={value} onChange={(e) => onChange(Number(e.target.value))} />
+    </TweakRow>
+  );
+}
+
+function TweakToggle({ label, value, onChange }) {
+  return (
+    <div className="twk-row twk-row-h">
+      <div className="twk-lbl"><span>{label}</span></div>
+      <button type="button" className="twk-toggle" data-on={value ? '1' : '0'}
+              role="switch" aria-checked={!!value}
+              onClick={() => onChange(!value)}><i /></button>
+    </div>
+  );
+}
+
+function TweakRadio({ label, value, options, onChange }) {
+  const trackRef = React.useRef(null);
+  const [dragging, setDragging] = React.useState(false);
+  // The active value is read by pointer-move handlers attached for the lifetime
+  // of a drag — ref it so a stale closure doesn't fire onChange for every move.
+  const valueRef = React.useRef(value);
+  valueRef.current = value;
+
+  // Segments wrap mid-word once per-segment width runs out. The track is
+  // ~248px (280 panel − 28 body pad − 4 seg pad), each button loses 12px
+  // to its own padding, and 11.5px system-ui averages ~6.3px/char — so 2
+  // options fit ~16 chars each, 3 fit ~10. Past that (or >3 options), fall
+  // back to a dropdown rather than wrap.
+  const labelLen = (o) => String(typeof o === 'object' ? o.label : o).length;
+  const maxLen = options.reduce((m, o) => Math.max(m, labelLen(o)), 0);
+  const fitsAsSegments = maxLen <= ({ 2: 16, 3: 10 }[options.length] ?? 0);
+  if (!fitsAsSegments) {
+    // <select> emits strings — map back to the original option value so the
+    // fallback stays type-preserving (numbers, booleans) like the segment path.
+    const resolve = (s) => {
+      const m = options.find((o) => String(typeof o === 'object' ? o.value : o) === s);
+      return m === undefined ? s : typeof m === 'object' ? m.value : m;
+    };
+    return <TweakSelect label={label} value={value} options={options}
+                        onChange={(s) => onChange(resolve(s))} />;
+  }
+  const opts = options.map((o) => (typeof o === 'object' ? o : { value: o, label: o }));
+  const idx = Math.max(0, opts.findIndex((o) => o.value === value));
+  const n = opts.length;
+
+  const segAt = (clientX) => {
+    const r = trackRef.current.getBoundingClientRect();
+    const inner = r.width - 4;
+    const i = Math.floor(((clientX - r.left - 2) / inner) * n);
+    return opts[Math.max(0, Math.min(n - 1, i))].value;
+  };
+
+  const onPointerDown = (e) => {
+    setDragging(true);
+    const v0 = segAt(e.clientX);
+    if (v0 !== valueRef.current) onChange(v0);
+    const move = (ev) => {
+      if (!trackRef.current) return;
+      const v = segAt(ev.clientX);
+      if (v !== valueRef.current) onChange(v);
+    };
+    const up = () => {
+      setDragging(false);
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerup', up);
+    };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+  };
+
+  return (
+    <TweakRow label={label}>
+      <div ref={trackRef} role="radiogroup" onPointerDown={onPointerDown}
+           className={dragging ? 'twk-seg dragging' : 'twk-seg'}>
+        <div className="twk-seg-thumb"
+             style={{ left: `calc(2px + ${idx} * (100% - 4px) / ${n})`,
+                      width: `calc((100% - 4px) / ${n})` }} />
+        {opts.map((o) => (
+          <button key={o.value} type="button" role="radio" aria-checked={o.value === value}>
+            {o.label}
+          </button>
+        ))}
+      </div>
+    </TweakRow>
+  );
+}
+
+function TweakSelect({ label, value, options, onChange }) {
+  return (
+    <TweakRow label={label}>
+      <select className="twk-field" value={value} onChange={(e) => onChange(e.target.value)}>
+        {options.map((o) => {
+          const v = typeof o === 'object' ? o.value : o;
+          const l = typeof o === 'object' ? o.label : o;
+          return <option key={v} value={v}>{l}</option>;
+        })}
+      </select>
+    </TweakRow>
+  );
+}
+
+function TweakText({ label, value, placeholder, onChange }) {
+  return (
+    <TweakRow label={label}>
+      <input className="twk-field" type="text" value={value} placeholder={placeholder}
+             onChange={(e) => onChange(e.target.value)} />
+    </TweakRow>
+  );
+}
+
+function TweakNumber({ label, value, min, max, step = 1, unit = '', onChange }) {
+  const clamp = (n) => {
+    if (min != null && n < min) return min;
+    if (max != null && n > max) return max;
+    return n;
+  };
+  const startRef = React.useRef({ x: 0, val: 0 });
+  const onScrubStart = (e) => {
+    e.preventDefault();
+    startRef.current = { x: e.clientX, val: value };
+    const decimals = (String(step).split('.')[1] || '').length;
+    const move = (ev) => {
+      const dx = ev.clientX - startRef.current.x;
+      const raw = startRef.current.val + dx * step;
+      const snapped = Math.round(raw / step) * step;
+      onChange(clamp(Number(snapped.toFixed(decimals))));
+    };
+    const up = () => {
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerup', up);
+    };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+  };
+  return (
+    <div className="twk-num">
+      <span className="twk-num-lbl" onPointerDown={onScrubStart}>{label}</span>
+      <input type="number" value={value} min={min} max={max} step={step}
+             onChange={(e) => onChange(clamp(Number(e.target.value)))} />
+      {unit && <span className="twk-num-unit">{unit}</span>}
+    </div>
+  );
+}
+
+// Relative-luminance contrast pick — checkmarks drawn over a swatch need to
+// read on both #111 and #fafafa without per-option configuration. Hex input
+// only (#rgb / #rrggbb); named or rgb()/hsl() colors fall through to "light".
+function __twkIsLight(hex) {
+  const h = String(hex).replace('#', '');
+  const x = h.length === 3 ? h.replace(/./g, (c) => c + c) : h.padEnd(6, '0');
+  const n = parseInt(x.slice(0, 6), 16);
+  if (Number.isNaN(n)) return true;
+  const r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
+  return r * 299 + g * 587 + b * 114 > 148000;
+}
+
+const __TwkCheck = ({ light }) => (
+  <svg viewBox="0 0 14 14" aria-hidden="true">
+    <path d="M3 7.2 5.8 10 11 4.2" fill="none" strokeWidth="2.2"
+          strokeLinecap="round" strokeLinejoin="round"
+          stroke={light ? 'rgba(0,0,0,.78)' : '#fff'} />
+  </svg>
+);
+
+// TweakColor — curated color/palette picker. Each option is either a single
+// hex string or an array of 1-5 hex strings; the card adapts — a lone color
+// renders solid, a palette renders colors[0] as the hero (left ~2/3) with the
+// rest stacked in a sharp column on the right. onChange emits the
+// option in the shape it was passed (string stays string, array stays array).
+// Without options it falls back to the native color input for back-compat.
+function TweakColor({ label, value, options, onChange }) {
+  if (!options || !options.length) {
+    return (
+      <div className="twk-row twk-row-h">
+        <div className="twk-lbl"><span>{label}</span></div>
+        <input type="color" className="twk-swatch" value={value}
+               onChange={(e) => onChange(e.target.value)} />
+      </div>
+    );
+  }
+  // Native <input type=color> emits lowercase hex per the HTML spec, so
+  // compare case-insensitively. String() guards JSON.stringify(undefined),
+  // which returns the primitive undefined (no .toLowerCase).
+  const key = (o) => String(JSON.stringify(o)).toLowerCase();
+  const cur = key(value);
+  return (
+    <TweakRow label={label}>
+      <div className="twk-chips" role="radiogroup">
+        {options.map((o, i) => {
+          const colors = Array.isArray(o) ? o : [o];
+          const [hero, ...rest] = colors;
+          const sup = rest.slice(0, 4);
+          const on = key(o) === cur;
+          return (
+            <button key={i} type="button" className="twk-chip" role="radio"
+                    aria-checked={on} data-on={on ? '1' : '0'}
+                    aria-label={colors.join(', ')} title={colors.join(' · ')}
+                    style={{ background: hero }}
+                    onClick={() => onChange(o)}>
+              {sup.length > 0 && (
+                <span>
+                  {sup.map((c, j) => <i key={j} style={{ background: c }} />)}
+                </span>
+              )}
+              {on && <__TwkCheck light={__twkIsLight(hero)} />}
+            </button>
+          );
+        })}
+      </div>
+    </TweakRow>
+  );
+}
+
+function TweakButton({ label, onClick, secondary = false }) {
+  return (
+    <button type="button" className={secondary ? 'twk-btn secondary' : 'twk-btn'}
+            onClick={onClick}>{label}</button>
+  );
+}
+
+Object.assign(window, {
+  useTweaks, TweaksPanel, TweakSection, TweakRow,
+  TweakSlider, TweakToggle, TweakRadio, TweakSelect,
+  TweakText, TweakNumber, TweakColor, TweakButton,
+});
+</script>
+<script type="text/babel">
+  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+    "navGap": 5,
+    "titleSize": 15,
+    "pillSize": 11.5
+  }/*EDITMODE-END*/;
+
+  function TweaksApp() {
+    const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+
+    React.useEffect(() => {
+      const r = document.documentElement;
+      r.style.setProperty('--nav-gap', t.navGap + 'px');
+      r.style.setProperty('--title-size', t.titleSize + 'px');
+      r.style.setProperty('--pill-size', t.pillSize + 'px');
+    }, [t.navGap, t.titleSize, t.pillSize]);
+
+    return (
+      <TweaksPanel>
+        <TweakSection label="Header spacing" />
+        <TweakSlider label="Gap: top line → pills" value={t.navGap} min={0} max={28} step={1} unit="px"
+                     onChange={(v) => setTweak('navGap', v)} />
+        <TweakSlider label="Top line size" value={t.titleSize} min={11} max={22} step={0.5} unit="px"
+                     onChange={(v) => setTweak('titleSize', v)} />
+        <TweakSlider label="Pill size" value={t.pillSize} min={9} max={16} step={0.5} unit="px"
+                     onChange={(v) => setTweak('pillSize', v)} />
+      </TweaksPanel>
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById('tweak-root')).render(<TweaksApp />);
 </script>
 
 </body>
